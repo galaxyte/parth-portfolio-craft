@@ -29,13 +29,13 @@ export const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "#",
+      href: "https://github.com/galaxyte",
       color: "hover:text-gray-900"
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "#",
+      href: "https://www.linkedin.com/in/parth-tiwari-a56335291/",
       color: "hover:text-blue-600"
     }
   ];
@@ -88,6 +88,8 @@ export const Contact = () => {
                     <a
                       key={index}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300 ${social.color}`}
                       aria-label={social.label}
                     >

@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Phone, Download } from "lucide-react";
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
 
 export const Hero = () => {
   const scrollToContact = () => {
@@ -42,17 +42,23 @@ export const Hero = () => {
           </div>
           
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button variant="outline" size="lg" className="hover-scale">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="hover-scale"
+              onClick={() => window.open('https://github.com/galaxyte', '_blank')}
+            >
               <Github className="mr-2" size={20} />
               GitHub
             </Button>
-            <Button variant="outline" size="lg" className="hover-scale">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="hover-scale"
+              onClick={() => window.open('https://www.linkedin.com/in/parth-tiwari-a56335291/', '_blank')}
+            >
               <Linkedin className="mr-2" size={20} />
               LinkedIn
-            </Button>
-            <Button variant="outline" size="lg" className="hover-scale">
-              <Download className="mr-2" size={20} />
-              Resume
             </Button>
           </div>
           
