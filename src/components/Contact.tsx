@@ -99,19 +99,6 @@ export const Contact = () => {
                 })}
               </div>
             </div>
-
-            {/* Call to Action */}
-            <div className="max-w-md mx-auto p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h4 className="text-lg font-semibold mb-2">Ready to start a project?</h4>
-              <p className="text-blue-200 mb-4">
-                I'm available for freelance work and full-time opportunities. 
-                Let's create something amazing together!
-              </p>
-              <Button variant="secondary" className="w-full">
-                <Mail className="mr-2" size={16} />
-                Send Quick Email
-              </Button>
-            </div>
           </div>
         </div>
 
