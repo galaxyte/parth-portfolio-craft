@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Code, Database, Server, Smartphone } from "lucide-react";
+import { Code, Database, Server, Smartphone, Network, Settings, Brain, Monitor } from "lucide-react";
 
 export const About = () => {
   const skills = {
@@ -26,6 +26,14 @@ export const About = () => {
       period: "2020-2021",
       location: "Chandigarh"
     }
+  ];
+
+  const fundamentals = [
+    { name: "DBMS", icon: Database },
+    { name: "Software Engineering", icon: Settings },
+    { name: "Networking", icon: Network },
+    { name: "Data Structures & Algorithms", icon: Brain },
+    { name: "Operating Systems", icon: Monitor }
   ];
 
   return (
@@ -88,14 +96,20 @@ export const About = () => {
         {/* Key Fundamentals */}
         <div className="text-center">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Core Fundamentals</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {["DBMS", "Software Engineering", "Networking", "Data Structures & Algorithms", "Operating Systems"].map((fundamental) => (
-              <Card key={fundamental} className="hover-scale">
-                <CardContent className="p-4 text-center">
-                  <span className="text-gray-700 font-medium">{fundamental}</span>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {fundamentals.map((fundamental) => {
+              const IconComponent = fundamental.icon;
+              return (
+                <Card key={fundamental.name} className="hover-scale">
+                  <CardContent className="p-4 text-center">
+                    <div className="flex flex-col items-center gap-2">
+                      <IconComponent size={24} className="text-blue-600" />
+                      <span className="text-gray-700 font-medium text-sm">{fundamental.name}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </div>
