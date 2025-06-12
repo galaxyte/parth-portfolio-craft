@@ -1,8 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github } from "lucide-react";
 
 export const Projects = () => {
   const projects = [
@@ -95,7 +93,7 @@ export const Projects = () => {
                 </div>
 
                 {/* Technologies */}
-                <div className="mb-6">
+                <div className="mt-auto">
                   <h4 className="font-semibold text-gray-900 mb-2">Technologies:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
@@ -107,18 +105,6 @@ export const Projects = () => {
                       </span>
                     ))}
                   </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3 mt-auto">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    <Github className="mr-2" size={16} />
-                    Code
-                  </Button>
-                  <Button size="sm" className="flex-1">
-                    <ExternalLink className="mr-2" size={16} />
-                    Live Demo
-                  </Button>
                 </div>
               </CardContent>
             </Card>
