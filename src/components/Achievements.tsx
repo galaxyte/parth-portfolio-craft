@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Award, Certificate, Code } from "lucide-react";
+import { Trophy, Award, Code } from "lucide-react";
 
 export const Achievements = () => {
   const achievements = [
@@ -18,7 +18,7 @@ export const Achievements = () => {
       title: "Essentials of Java Certification",
       platform: "Microsoft",
       type: "Certification",
-      icon: Certificate,
+      icon: Award,
       description: "Covered key concepts, including object-oriented programming, data structures, and algorithms in Java.",
       skills: ["OOP", "Data Structures", "Algorithms"],
       color: "from-blue-500 to-indigo-500"
