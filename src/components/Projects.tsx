@@ -16,6 +16,7 @@ export const Projects = () => {
       technologies: ["React.js", "Express.js", "MongoDB", "Node.js", "Tailwind CSS"],
       accuracy: "99%",
       link: "#"
+      
     },
     {
       title: "Railway Tracking & Arrival Prediction",

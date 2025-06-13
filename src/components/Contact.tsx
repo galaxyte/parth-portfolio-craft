@@ -105,7 +105,7 @@ export const Contact = () => {
         {/* Footer */}
         <div className="text-center mt-16 pt-8 border-t border-white/20">
           <p className="text-blue-200">
-            © 2024 Parth Tiwari. Built with React, TypeScript, and Tailwind CSS.
+            © 2025 Parth Tiwari
           </p>
         </div>
       </div>
