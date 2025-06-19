@@ -36,13 +36,30 @@ export const Projects = () => {
       title: "Distributed Learning Management System",
       description: "Collaborated on an innovative educational platform with integrated performance tracking, increasing content upload frequency by 50% and enhanced analytics for improved user experience.",
       features: [
+         "Semantic search using OpenAI embeddings",
+  "Web scraping and intelligent content chunking",
+  "FastAPI backend for processing and querying",
+  "Weaviate vector database for similarity matching",
+  "React frontend displaying top 10 relevant results"
+      ],
+      technologies: ["React.js", "Express.js", "Node.js", "MongoDB"],
+      improvement: "50% increase in content uploads",
+      link: "#"
+    },
+    {
+      title: "Semantic Search Engine",
+      description: "Developed a full-stack semantic search application that extracts, processes, and indexes web content using OpenAI embeddings and Weaviate, delivering top 10 contextually relevant results with over 95% match accuracy and optimized response times.",
+
+      features: [
         "Performance tracking and analytics",
         "Content management system",
         "User engagement monitoring",
         "Enhanced learning experience"
       ],
-      technologies: ["React.js", "Express.js", "Node.js", "MongoDB"],
-      improvement: "50% increase in content uploads",
+      technologies: ["React.js", "FastAPI", "Python", "Weaviate", "OpenAI API"],
+      accuracy: "95%",
+      improvement: "60% faster updates",
+
       link: "#"
     }
   ];
