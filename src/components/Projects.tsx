@@ -60,7 +60,7 @@ export const Projects = () => {
       accuracy: "95%",
       improvement: "60% faster updates",
 
-      link: "#"
+      link: "&"
     }
   ];
 
