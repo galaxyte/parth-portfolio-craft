@@ -61,7 +61,25 @@ export const Projects = () => {
       improvement: "60% faster updates",
 
       link: "&"
-    }
+    },
+
+     {
+  title: "Abnormal File Vault",
+  description: "Built a full-stack file hosting application using React and Django, enhanced with Supabase for cloud-native Postgres storage, real-time deduplication, and efficient file retrieval via advanced filtering and intelligent search.",
+
+  features: [
+    "Duplicate file detection and storage optimization",
+    "Real-time Supabase database integration",
+    "Search files by filename with instant results",
+    "Advanced filters by file type, size, and upload date",
+    "Live storage savings tracking and analytics"
+  ],
+  technologies: ["React", "Django", "Django REST Framework", "Supabase", "PostgreSQL", "Docker"],
+  accuracy: "100% file deduplication using content hashing",
+  improvement: "Up to 70% storage savings with real-time search performance boost",
+
+  link: "&"
+}
   ];
 
   return (
