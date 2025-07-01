@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -15,7 +14,7 @@ export const Projects = () => {
       ],
       technologies: ["React.js", "Express.js", "MongoDB", "Node.js", "Tailwind CSS"],
       accuracy: "99%",
-      link: "#"
+      link: "https://www.unifindss.com/"
       
     },
     {
@@ -30,7 +29,7 @@ export const Projects = () => {
       technologies: ["Express.js", "HTML5", "CSS3", "MongoDB", "Rapid API"],
       accuracy: "99.9%",
       improvement: "40% faster updates",
-      link: "#"
+      link: "https://github.com/galaxyte/Rail-Info"
     },
     {
       title: "Distributed Learning Management System",
@@ -44,7 +43,7 @@ export const Projects = () => {
       ],
       technologies: ["React.js", "Express.js", "Node.js", "MongoDB"],
       improvement: "50% increase in content uploads",
-      link: "#"
+      link: "https://github.com/galaxyte/Distributed_LMS"
     },
     {
       title: "Semantic Search Engine",
@@ -60,7 +59,7 @@ export const Projects = () => {
       accuracy: "95%",
       improvement: "60% faster updates",
 
-      link: "&"
+      link: "https://github.com/galaxyte/Semantic-search"
     },
 
      {
@@ -78,7 +77,7 @@ export const Projects = () => {
   accuracy: "100% file deduplication using content hashing",
   improvement: "Up to 70% storage savings with real-time search performance boost",
 
-  link: "&"
+  link: "https://abnormal-file-vault.vercel.app/"
 }
   ];
 
@@ -94,56 +93,64 @@ export const Projects = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <Card key={index} className="hover-scale transition-all duration-300 hover:shadow-xl h-full">
-              <CardContent className="p-6 flex flex-col h-full">
-                <div className="mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                  
-                  {/* Key Metrics */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.accuracy && (
-                      <Badge className="bg-green-100 text-green-700">
-                        {project.accuracy} Accuracy
-                      </Badge>
-                    )}
-                    {project.improvement && (
-                      <Badge className="bg-blue-100 text-blue-700">
-                        {project.improvement}
-                      </Badge>
-                    )}
+            <a
+              key={index}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block hover:scale-[1.03] transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+            >
+              <Card className="hover-scale transition-all duration-300 hover:shadow-xl h-full cursor-pointer">
+                <CardContent className="p-6 flex flex-col h-full">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                    
+                    {/* Key Metrics */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.accuracy && (
+                        <Badge className="bg-green-100 text-green-700">
+                          {project.accuracy} Accuracy
+                        </Badge>
+                      )}
+                      {project.improvement && (
+                        <Badge className="bg-blue-100 text-blue-700">
+                          {project.improvement}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* Features */}
-                <div className="mb-6 flex-grow">
-                  <h4 className="font-semibold text-gray-900 mb-2">Key Features:</h4>
-                  <ul className="space-y-1">
-                    {project.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start gap-2 text-sm text-gray-600">
-                        <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="mt-auto">
-                  <h4 className="font-semibold text-gray-900 mb-2">Technologies:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  {/* Features */}
+                  <div className="mb-6 flex-grow">
+                    <h4 className="font-semibold text-gray-900 mb-2">Key Features:</h4>
+                    <ul className="space-y-1">
+                      {project.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-2 text-sm text-gray-600">
+                          <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+
+                  {/* Technologies */}
+                  <div className="mt-auto">
+                    <h4 className="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
       </div>
