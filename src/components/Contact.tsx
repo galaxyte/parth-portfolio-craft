@@ -20,7 +20,7 @@ export const Contact = () => {
     {
       icon: MapPin,
       label: "Location",
-      value: "Mohali, India",
+      value: "Noida, India",
       href: "#"
     }
   ];
