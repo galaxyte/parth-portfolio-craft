@@ -78,7 +78,27 @@ export const Projects = () => {
   improvement: "Up to 70% storage savings with real-time search performance boost",
 
   link: "https://abnormal-file-vault.vercel.app/"
+},
+
+{
+  title: "crypto_arbitrage_tracker_alert",
+  description: "Developed a real-time crypto arbitrage tracking platform that monitors price differences across multiple exchanges, offering users actionable insights and alerts to capitalize on profitable trading opportunities instantly.",
+
+  features: [
+    "Real-time tracking of cryptocurrency prices across major exchanges",
+    "Automated detection of arbitrage opportunities with profitability calculations",
+    "Customizable alert system via email and in-browser notifications",
+    "Interactive dashboard with live charts and historical arbitrage trends",
+    "Filter opportunities by coin, exchange, and profit percentage"
+  ],
+  technologies: ["React", "Python", "FastAPI", "WebSockets", "CoinGecko/CoinMarketCap API", "MongoDB"],
+  accuracy: "99.8% real-time data accuracy using websocket streaming and fallback REST APIs",
+  improvement: "Enabled users to identify and act on arbitrage windows up to 60% faster compared to manual tracking",
+
+  link: "https://crypto-tracker-alpha-navy.vercel.app/"
 }
+
+
   ];
 
   return (

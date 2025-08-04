@@ -6,7 +6,7 @@ export const About = () => {
   const skills = {
     "Languages": ["C/C++", "Python", "Java", "JavaScript"],
     "Frontend": ["React.js", "HTML5", "CSS3", "Bootstrap", "Tailwind CSS"],
-    "Backend": ["Express.js", "Node.js", "RESTful API"],
+    "Backend": ["Express.js", "Node.js", "RESTful API","FastAPI"],
     "Database": ["MongoDB", "Oracle", "SQL/MySQL"],
     "Tools": ["Git/GitHub", "API Integration", "Postman", "VS Code"]
   };

@@ -2,15 +2,34 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar } from "lucide-react";
+import jungleworksLogo from "./assests/jungleworks_logo.jpg";
+import smarterCodesLogo from "./assests/1631327478988.jpg";
 
 export const Experience = () => {
   const experiences = [
+
+    {
+      company: "Smarter.Codes",
+      logo: smarterCodesLogo,
+      position: "Software Developer",
+      period: "July 2025 - Present",
+      location: "Remote",
+      type: "Current",
+      description: [
+        "Currently working at Synterex Engineering Group, focusing on the development and enhancement of dashboard features for the Algil Marketplace platform.",
+        "Responsible for implementing new functionalities and fixing critical bugs to ensure a smooth and intuitive user experience.",
+        "Actively contribute to the development and debugging of the AutoMapping feature, aimed at streamlining data integration and improving automation workflows.",
+        "Work aligns with Synterex's mission of leveraging agile methodologies and AI-driven solutions like AgileWriter to support efficient and accessible clinical documentation."
+      ]
+      
+    },
     {
       company: "Jungle Works",
+      logo: jungleworksLogo,
       position: "Associate Software Developer Intern",
-      period: "May 2025 - Present",
+      period: "May 2025 - June 2025",
       location: "Mohali",
-      type: "Current",
+      type: "Previous",
       description: [
         "Worked with the Flash Delivery team, focusing on resolving issues and debugging errors on the Flash Delivery website.",
         "Improved the website's functionality to enhance user experience and provide better tools for merchants.",
@@ -19,7 +38,7 @@ export const Experience = () => {
     },
     {
       company: "Zeal Web Technologies",
-      position: "Software Developer",
+      position: "Software Developer Intern",
       period: "June 2024 – May 2025",
       location: "Remote",
       type: "Previous",
@@ -47,9 +66,20 @@ export const Experience = () => {
             <Card key={index} className="hover-scale transition-all duration-300 hover:shadow-xl">
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{exp.position}</h3>
-                    <h4 className="text-xl font-semibold text-blue-600 mb-2">{exp.company}</h4>
+                  <div className="flex items-center gap-4">
+                    {exp.logo && (
+                      <div className="flex-shrink-0">
+                        <img 
+                          src={exp.logo} 
+                          alt={`${exp.company} logo`}
+                          className="w-12 h-12 rounded-lg object-cover border border-gray-200"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{exp.position}</h3>
+                      <h4 className="text-xl font-semibold text-blue-600 mb-2">{exp.company}</h4>
+                    </div>
                   </div>
                   <div className="flex flex-col md:items-end gap-2">
                     <Badge 
