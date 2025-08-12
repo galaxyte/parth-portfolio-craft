@@ -1,5 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export const Projects = () => {
   const projects = [
@@ -64,116 +67,135 @@ export const Projects = () => {
 
      {
   title: "Abnormal File Vault",
-  description: "Built a full-stack file hosting application using React and Django, enhanced with Supabase for cloud-native Postgres storage, real-time deduplication, and efficient file retrieval via advanced filtering and intelligent search.",
-
+  description: "Developed a secure file storage system with advanced encryption and access control, ensuring data privacy and security for sensitive documents.",
   features: [
-    "Duplicate file detection and storage optimization",
-    "Real-time Supabase database integration",
-    "Search files by filename with instant results",
-    "Advanced filters by file type, size, and upload date",
-    "Live storage savings tracking and analytics"
+    "End-to-end encryption for file security",
+    "Role-based access control system",
+    "Audit logging and monitoring",
+    "Secure file sharing capabilities"
   ],
-  technologies: ["React", "Django", "Django REST Framework", "Supabase", "PostgreSQL", "Docker"],
-  accuracy: "100% file deduplication using content hashing",
-  improvement: "Up to 70% storage savings with real-time search performance boost",
-
-  link: "https://abnormal-file-vault.vercel.app/"
-},
-
-{
-  title: "crypto_arbitrage_tracker_alert",
-  description: "Developed a real-time crypto arbitrage tracking platform that monitors price differences across multiple exchanges, offering users actionable insights and alerts to capitalize on profitable trading opportunities instantly.",
-
-  features: [
-    "Real-time tracking of cryptocurrency prices across major exchanges",
-    "Automated detection of arbitrage opportunities with profitability calculations",
-    "Customizable alert system via email and in-browser notifications",
-    "Interactive dashboard with live charts and historical arbitrage trends",
-    "Filter opportunities by coin, exchange, and profit percentage"
-  ],
-  technologies: ["React", "Python", "FastAPI", "WebSockets", "CoinGecko/CoinMarketCap API", "MongoDB"],
-  accuracy: "99.8% real-time data accuracy using websocket streaming and fallback REST APIs",
-  improvement: "Enabled users to identify and act on arbitrage windows up to 60% faster compared to manual tracking",
-
-  link: "https://crypto-tracker-alpha-navy.vercel.app/"
+  technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT"],
+  link: "https://github.com/galaxyte/Abnormal-File-Vault"
 }
-
-
   ];
 
   return (
     <section id="projects" className="py-20 bg-white/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Projects</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Showcase of my technical skills through innovative web applications and solutions.
+            A showcase of my technical projects, demonstrating problem-solving skills and full-stack development expertise
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="space-y-8">
           {projects.map((project, index) => (
-            <a
-              key={index}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block hover:scale-[1.03] transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
-            >
-              <Card className="hover-scale transition-all duration-300 hover:shadow-xl h-full cursor-pointer">
-                <CardContent className="p-6 flex flex-col h-full">
-                  <div className="mb-4">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                    
-                    {/* Key Metrics */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.accuracy && (
-                        <Badge className="bg-green-100 text-green-700">
-                          {project.accuracy} Accuracy
-                        </Badge>
-                      )}
-                      {project.improvement && (
-                        <Badge className="bg-blue-100 text-blue-700">
-                          {project.improvement}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className="mb-6 flex-grow">
-                    <h4 className="font-semibold text-gray-900 mb-2">Key Features:</h4>
-                    <ul className="space-y-1">
-                      {project.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-2 text-sm text-gray-600">
-                          <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Technologies */}
-                  <div className="mt-auto">
-                    <h4 className="font-semibold text-gray-900 mb-2">Technologies:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </a>
+            <ProjectCard 
+              key={index} 
+              project={project}
+              index={index}
+            />
           ))}
         </div>
       </div>
     </section>
+  );
+};
+
+// Project Card Component with Framer Motion
+const ProjectCard = ({ project, index }: { project: any, index: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: false, 
+    margin: "-100px",
+    amount: 0.3
+  });
+
+  // Alternate animation direction based on index
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ 
+        x: isEven ? -100 : 100, 
+        opacity: 0, 
+        y: 20,
+        scale: 0.95
+      }}
+      animate={isInView ? { 
+        x: 0, 
+        opacity: 1, 
+        y: 0,
+        scale: 1
+      } : { 
+        x: isEven ? -100 : 100, 
+        opacity: 0, 
+        y: 20,
+        scale: 0.95
+      }}
+      transition={{ 
+        duration: 0.8, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        delay: index * 0.15
+      }}
+    >
+      <Card className="hover-scale">
+        <CardContent className="p-6">
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">{project.title}</h3>
+              <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+              
+              <div className="mb-4">
+                <h4 className="font-semibold text-gray-900 mb-2">Key Features:</h4>
+                <ul className="space-y-1">
+                  {project.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="text-gray-700 flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((tech) => (
+                  <Badge key={tech} variant="secondary" className="bg-blue-100 text-blue-700">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+
+              {project.accuracy && (
+                <div className="mb-4">
+                  <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                    Accuracy: {project.accuracy}
+                  </span>
+                </div>
+              )}
+
+              {project.improvement && (
+                <div className="mb-4">
+                  <span className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                    {project.improvement}
+                  </span>
+                </div>
+              )}
+
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              >
+                View Project →
+              </a>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
