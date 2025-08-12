@@ -45,7 +45,7 @@ export const Contact = () => {
             <ContactInfoCard 
               icon={MapPin}
               title="Location"
-              value="Chandigarh, India"
+              value="Noida, Uttar Pradesh"
               bgColor="bg-purple-100"
               iconColor="text-purple-600"
               index={2}
