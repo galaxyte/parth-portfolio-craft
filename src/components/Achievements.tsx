@@ -13,7 +13,7 @@ export const Achievements = () => {
       platform: "Unstop",
       type: "Competition",
       icon: Trophy,
-      description: "Collaborated with teammates to build an innovative solution, leading to a runner-up finish. Demonstrated problem-solving, teamwork, and technical expertise under pressure.",
+      description: "Collaborated with teammates to design an AI-assisted green energy optimization prototype, showcasing strong problem-solving, teamwork, and technical expertise under pressure — which led to a runner-up finish in the competition.",
       rewards: ["T-shirt", "Diary"],
       color: "from-yellow-500 to-orange-500"
     },
@@ -43,11 +43,11 @@ export const Achievements = () => {
   ];
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50">
+    <section id="achievements" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Achievements</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">Achievements</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Recognition of my skills and accomplishments in various competitions, certifications, and experiences
           </p>
         </div>
@@ -103,35 +103,35 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
         delay: index * 0.2
       }}
     >
-      <Card className="hover-scale">
-        <CardContent className="p-6 h-full flex flex-col">
-          <div className="text-center mb-4">
-            <div className={`w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-r ${achievement.color} flex items-center justify-center`}>
-              <IconComponent size={32} className="text-white" />
+      <Card className="glass-card card-hover glow-effect">
+        <CardContent className="p-8 h-full flex flex-col">
+          <div className="text-center mb-6">
+            <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${achievement.color} flex items-center justify-center glow-effect pulse-glow`}>
+              <IconComponent size={40} className="text-white" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{achievement.title}</h3>
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+            <h3 className="text-2xl font-bold text-white mb-4 gradient-text">{achievement.title}</h3>
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <Badge variant="secondary" className="glass-effect text-blue-300 border-blue-400/30">
                 {achievement.platform}
               </Badge>
-              <Badge variant="outline" className="border-gray-300 text-gray-600">
+              <Badge variant="outline" className="glass-effect text-gray-300 border-gray-400/30">
                 {achievement.type}
               </Badge>
             </div>
             {achievement.date && (
-              <p className="text-sm text-gray-500">{achievement.date}</p>
+              <p className="text-sm text-gray-400">{achievement.date}</p>
             )}
           </div>
 
-          <p className="text-gray-700 mb-4 flex-grow">{achievement.description}</p>
+          <p className="text-gray-300 mb-6 flex-grow leading-relaxed">{achievement.description}</p>
 
           {achievement.tasks && (
-            <div className="mb-4">
-              <h4 className="font-semibold text-gray-900 mb-2">Key Tasks:</h4>
-              <ul className="space-y-1">
+            <div className="mb-6">
+              <h4 className="font-semibold text-white mb-3 text-lg">Key Tasks:</h4>
+              <ul className="space-y-2">
                 {achievement.tasks.map((task, taskIndex) => (
-                  <li key={taskIndex} className="text-gray-700 flex items-start gap-2 text-sm">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
+                  <li key={taskIndex} className="text-gray-300 flex items-start gap-3 text-sm">
+                    <span className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mt-1 flex-shrink-0 glow-effect"></span>
                     {task}
                   </li>
                 ))}
@@ -140,13 +140,13 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
           )}
 
           {achievement.skills && (
-            <div className="mb-4">
-              <h4 className="font-semibold text-gray-900 mb-2">Skills Covered:</h4>
+            <div className="mb-6">
+              <h4 className="font-semibold text-white mb-3 text-lg">Skills Covered:</h4>
               <div className="flex flex-wrap gap-2">
                 {achievement.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium"
+                    className="px-3 py-1 glass-effect text-blue-300 border-blue-400/30 rounded-full text-xs font-medium hover:bg-blue-500/20 transition-all duration-300"
                   >
                     {skill}
                   </span>
@@ -157,10 +157,10 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
 
           {achievement.rewards && (
             <div className="mt-auto">
-              <h4 className="font-semibold text-gray-900 mb-2">Rewards:</h4>
+              <h4 className="font-semibold text-white mb-3 text-lg">Rewards:</h4>
               <div className="flex flex-wrap gap-2">
                 {achievement.rewards.map((reward) => (
-                  <Badge key={reward} className="bg-yellow-100 text-yellow-700">
+                  <Badge key={reward} className="glass-effect text-yellow-300 border-yellow-400/30 hover:bg-yellow-500/20 transition-all duration-300">
                     {reward}
                   </Badge>
                 ))}

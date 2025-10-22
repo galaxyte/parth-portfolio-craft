@@ -54,11 +54,11 @@ export const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+    <section id="experience" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Experience</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">Experience</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             My professional journey in software development, from internships to current role
           </p>
         </div>
@@ -97,47 +97,47 @@ const ExperienceCard = ({ experience, index }: { experience: any, index: number 
         delay: index * 0.2
       }}
     >
-      <Card className="hover-scale">
-        <CardContent className="p-6">
-          <div className="flex flex-col md:flex-row gap-6">
+      <Card className="glass-card card-hover glow-effect">
+        <CardContent className="p-8">
+          <div className="flex flex-col md:flex-row gap-8">
             {experience.logo && (
               <div className="flex-shrink-0">
                 <img 
                   src={experience.logo} 
                   alt={`${experience.company} logo`} 
-                  className="w-20 h-20 object-contain rounded-lg border"
+                  className="w-24 h-24 object-contain rounded-xl border border-white/20 glow-effect"
                 />
               </div>
             )}
             
             <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center gap-2 mb-3">
-                <h3 className="text-xl font-bold text-gray-900">{experience.company}</h3>
+              <div className="flex flex-col md:flex-row md:items-center gap-3 mb-4">
+                <h3 className="text-2xl font-bold text-white gradient-text">{experience.company}</h3>
                 <Badge 
                   variant={experience.type === "Current" ? "default" : "secondary"}
-                  className={experience.type === "Current" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700"}
+                  className={experience.type === "Current" ? "glass-effect text-green-300 border-green-400/30" : "glass-effect text-gray-300 border-gray-400/30"}
                 >
                   {experience.type}
                 </Badge>
               </div>
               
-              <h4 className="text-lg font-semibold text-blue-600 mb-2">{experience.position}</h4>
+              <h4 className="text-xl font-semibold text-blue-400 mb-4">{experience.position}</h4>
               
-              <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-600">
-                <div className="flex items-center gap-1">
-                  <Calendar size={16} />
+              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-gray-400">
+                <div className="flex items-center gap-2">
+                  <Calendar size={18} className="text-blue-400" />
                   <span>{experience.period}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <MapPin size={16} />
+                <div className="flex items-center gap-2">
+                  <MapPin size={18} className="text-purple-400" />
                   <span>{experience.location}</span>
                 </div>
               </div>
               
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {experience.description.map((desc, descIndex) => (
-                  <li key={descIndex} className="text-gray-700 flex items-start gap-2">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
+                  <li key={descIndex} className="text-gray-300 flex items-start gap-3 leading-relaxed">
+                    <span className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mt-1 flex-shrink-0 glow-effect"></span>
                     {desc}
                   </li>
                 ))}

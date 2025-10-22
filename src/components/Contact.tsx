@@ -3,18 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 export const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">Get In Touch</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology
           </p>
         </div>
@@ -22,7 +22,7 @@ export const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Contact Information</h3>
             
             <ContactInfoCard 
               icon={Mail}
@@ -36,7 +36,7 @@ export const Contact = () => {
             <ContactInfoCard 
               icon={Phone}
               title="Phone"
-              value="+91 7267092113"
+              value="+91 7267092113 ,+91 9211975266" 
               bgColor="bg-green-100"
               iconColor="text-green-600"
               index={1}
@@ -54,7 +54,7 @@ export const Contact = () => {
 
           {/* Contact Form */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Message</h3>
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Send Message</h3>
             <ContactForm />
           </div>
         </div>
@@ -90,15 +90,15 @@ const ContactInfoCard = ({ icon: Icon, title, value, bgColor, iconColor, index }
         delay: index * 0.15
       }}
     >
-      <Card className="hover-scale">
+      <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6">
           <div className="flex items-center gap-4">
-            <div className={`w-12 h-12 ${bgColor} rounded-full flex items-center justify-center`}>
-              <Icon className={iconColor} size={24} />
+            <div className={`w-14 h-14 ${bgColor} rounded-full flex items-center justify-center glow-effect`}>
+              <Icon className={iconColor} size={28} />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900">{title}</h4>
-              <p className="text-gray-600">{value}</p>
+              <h4 className="font-semibold text-white text-lg">{title}</h4>
+              <p className="text-gray-300">{value}</p>
             </div>
           </div>
         </CardContent>
@@ -116,6 +116,75 @@ const ContactForm = () => {
     amount: 0.3
   });
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const validateForm = () => {
+    const newErrors: {[key: string]: string} = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.subject.trim()) {
+      newErrors.subject = 'Subject is required';
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    // Simulate form submission (replace with actual API call)
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
   return (
     <motion.div
       ref={ref}
@@ -127,66 +196,145 @@ const ContactForm = () => {
         delay: 0.3
       }}
     >
-      <Card className="hover-scale">
-        <CardContent className="p-6">
-          <form className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <Card className="glass-card glow-effect">
+        <CardContent className="p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Name
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-3">
+                  Name *
                 </label>
                 <Input
                   id="name"
+                  name="name"
                   type="text"
                   placeholder="Your name"
-                  className="w-full"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
+                    errors.name ? 'border-red-400' : ''
+                  }`}
                   required
                 />
+                {errors.name && (
+                  <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                    <AlertCircle size={16} />
+                    {errors.name}
+                  </div>
+                )}
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-3">
+                  Email *
                 </label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="your.email@example.com"
-                  className="w-full"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
+                    errors.email ? 'border-red-400' : ''
+                  }`}
                   required
                 />
+                {errors.email && (
+                  <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                    <AlertCircle size={16} />
+                    {errors.email}
+                  </div>
+                )}
               </div>
             </div>
             
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                Subject
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-3">
+                Subject *
               </label>
               <Input
                 id="subject"
+                name="subject"
                 type="text"
                 placeholder="What's this about?"
-                className="w-full"
+                value={formData.subject}
+                onChange={handleChange}
+                className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
+                  errors.subject ? 'border-red-400' : ''
+                }`}
                 required
               />
+              {errors.subject && (
+                <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                  <AlertCircle size={16} />
+                  {errors.subject}
+                </div>
+              )}
             </div>
             
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message
+              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-3">
+                Message *
               </label>
               <Textarea
                 id="message"
+                name="message"
                 placeholder="Tell me more about your project or inquiry..."
                 rows={5}
-                className="w-full"
+                value={formData.message}
+                onChange={handleChange}
+                className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
+                  errors.message ? 'border-red-400' : ''
+                }`}
                 required
               />
+              {errors.message && (
+                <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                  <AlertCircle size={16} />
+                  {errors.message}
+                </div>
+              )}
             </div>
             
-            <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-              <Send className="mr-2" size={20} />
-              Send Message
+            <Button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white transition-all duration-300 glow-effect disabled:opacity-50"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Sending...
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Send size={20} />
+                  Send Message
+                </div>
+              )}
             </Button>
+
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 text-green-400 text-sm"
+              >
+                <CheckCircle size={16} />
+                Message sent successfully! I'll get back to you soon.
+              </motion.div>
+            )}
+
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 text-red-400 text-sm"
+              >
+                <AlertCircle size={16} />
+                Something went wrong. Please try again.
+              </motion.div>
+            )}
           </form>
         </CardContent>
       </Card>

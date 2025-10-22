@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Database, Server, Smartphone, Network, Settings, Brain, Monitor } from "lucide-react";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export const About = () => {
@@ -10,11 +10,24 @@ export const About = () => {
   const skillsRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const skills = {
-    "Languages": ["C/C++", "Python", "Java", "JavaScript"],
-    "Frontend": ["React.js", "HTML5", "CSS3", "Bootstrap", "Tailwind CSS"],
-    "Backend": ["Express.js", "Node.js", "RESTful API","FastAPI"],
-    "Database": ["MongoDB", "Oracle", "SQL/MySQL"],
-    "Tools": ["Git/GitHub", "API Integration", "Postman", "VS Code"]
+    "Languages": ["Python", "Java", "JavaScript", "TypeScript"],
+    "Frameworks": ["FastAPI", "Flask", "Express.js", "React.js", "Node.js", "Tailwind CSS", "Next.js"],
+    "Database": ["MongoDB", "PostgreSQL", "MySQL", "Oracle" , "VectorDB" , "Weaviate"],
+    "DevOps": ["GitHub", "Docker", "Postman", "GCP"],
+    "AI": ["GenAI", "OpenAI Agents SDK", "CrewAI", "LangGraph", "AutoGen", "MCP (Model Context Protocol)" ,"LongChain" , "LLM" ]
+  };
+
+  const skillLevels = {
+    "Python": 95,
+    "JavaScript": 90,
+    "React.js": 88,
+    "Node.js": 85,
+    "TypeScript": 82,
+    "FastAPI": 80,
+    "MongoDB": 85,
+    "PostgreSQL": 75,
+    "Docker": 70,
+    "AWS/GCP": 65
   };
 
   const education = [
@@ -43,11 +56,11 @@ export const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white/50">
+    <section id="about" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">About Me</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             I'm a passionate Software Developer with expertise in full-stack web development. 
             I love creating innovative solutions and working with cutting-edge technologies.
           </p>
@@ -56,7 +69,7 @@ export const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Education */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Education</h3>
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Education</h3>
             <div className="space-y-6">
               {education.map((edu, index) => (
                 <EducationCard 
@@ -70,7 +83,7 @@ export const About = () => {
 
           {/* Technical Skills */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Technical Skills</h3>
+            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Technical Skills</h3>
             <div className="space-y-4">
               {Object.entries(skills).map(([category, skillList], index) => (
                 <SkillsCard 
@@ -86,12 +99,27 @@ export const About = () => {
 
         {/* Key Fundamentals */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Core Fundamentals</h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Core Fundamentals</h3>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {fundamentals.map((fundamental, index) => (
               <FundamentalCard 
                 key={fundamental.name} 
                 fundamental={fundamental}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Skills Progress Section */}
+        <div className="mt-16">
+          <h3 className="text-3xl font-bold text-white mb-8 gradient-text text-center">Technical Proficiency</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {Object.entries(skillLevels).map(([skill, level], index) => (
+              <SkillProgressCard 
+                key={skill}
+                skill={skill}
+                level={level}
                 index={index}
               />
             ))}
@@ -122,12 +150,12 @@ const EducationCard = ({ education, index }: { education: any, index: number }) 
         delay: index * 0.1
       }}
     >
-      <Card className="hover-scale">
+      <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6">
-          <h4 className="text-lg font-semibold text-gray-900">{education.institution}</h4>
-          <p className="text-blue-600 font-medium">{education.degree}</p>
-          <p className="text-gray-600">{education.grade}</p>
-          <div className="flex justify-between items-center mt-2 text-sm text-gray-500">
+          <h4 className="text-xl font-semibold text-white mb-2">{education.institution}</h4>
+          <p className="text-blue-400 font-medium mb-2">{education.degree}</p>
+          <p className="text-gray-300 mb-3">{education.grade}</p>
+          <div className="flex justify-between items-center text-sm text-gray-400">
             <span>{education.period}</span>
             <span>{education.location}</span>
           </div>
@@ -157,18 +185,68 @@ const SkillsCard = ({ category, skillList, index }: { category: string, skillLis
         delay: index * 0.1
       }}
     >
-      <Card className="hover-scale">
-        <CardContent className="p-4">
-          <h4 className="font-semibold text-gray-900 mb-2">{category}</h4>
-          <div className="flex flex-wrap gap-2">
+      <Card className="glass-card card-hover glow-effect">
+        <CardContent className="p-6">
+          <h4 className="font-semibold text-white mb-4 text-xl">{category}</h4>
+          <div className="flex flex-wrap gap-3">
             {skillList.map((skill) => (
               <span
                 key={skill}
-                className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium"
+                className="px-4 py-2 glass-effect text-blue-300 border-blue-400/30 rounded-full text-sm font-medium hover:bg-blue-500/20 transition-all duration-300"
               >
                 {skill}
               </span>
             ))}
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+};
+
+// Skill Progress Card Component with Framer Motion
+const SkillProgressCard = ({ skill, level, index }: { skill: string, level: number, index: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: false, 
+    margin: "-100px",
+    amount: 0.3
+  });
+  const [animatedLevel, setAnimatedLevel] = useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      const timer = setTimeout(() => {
+        setAnimatedLevel(level);
+      }, index * 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, level, index]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ x: -50, opacity: 0 }}
+      animate={isInView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        delay: index * 0.1
+      }}
+    >
+      <Card className="glass-card glow-effect">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-center mb-3">
+            <h4 className="text-white font-semibold">{skill}</h4>
+            <span className="text-blue-400 font-bold">{animatedLevel}%</span>
+          </div>
+          <div className="w-full bg-gray-700 rounded-full h-3">
+            <motion.div 
+              className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${animatedLevel}%` }}
+              transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
+            />
           </div>
         </CardContent>
       </Card>
@@ -198,11 +276,11 @@ const FundamentalCard = ({ fundamental, index }: { fundamental: any, index: numb
         delay: index * 0.1
       }}
     >
-      <Card className="hover-scale">
-        <CardContent className="p-4 text-center">
-          <div className="flex flex-col items-center gap-2">
-            <IconComponent size={24} className="text-blue-600" />
-            <span className="text-gray-700 font-medium text-sm">{fundamental.name}</span>
+      <Card className="glass-card card-hover glow-effect">
+        <CardContent className="p-6 text-center">
+          <div className="flex flex-col items-center gap-3">
+            <IconComponent size={32} className="text-blue-400" />
+            <span className="text-gray-300 font-medium text-sm">{fundamental.name}</span>
           </div>
         </CardContent>
       </Card>
