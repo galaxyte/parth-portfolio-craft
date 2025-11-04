@@ -40,7 +40,7 @@ export const Projects = () => {
       technologies: ["CrewAI", "LangGraph", "OpenAI SDK", "FastAPI", "Weaviate", "React.js", "TailwindCSS"],
       accuracy: "Multi-source validation",
       improvement: "Autonomous research workflow",
-      link: "https://github.com/galaxyte/Agentic-AI-Research-Assistant",
+      link: "https://agentic-frontend-n4sc.onrender.com/",
       category: "AI/ML",
       featured: true
     },
