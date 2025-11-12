@@ -9,6 +9,47 @@ export const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   
   const projects = [
+
+    {
+      title: "Autodialer",
+      description: "Developed an AI-assisted calling automation platform that allows teams to queue Twilio test calls, track real-time call status, and even trigger automated calls using natural-language prompts powered by OpenAI.",
+      features: [
+        "Upload up to 100 Twilio test numbers via text or CSV and run controlled call campaigns",
+        "Per-call status tracking with real-time dashboard updates (success, failure, skipped)",
+        "AI prompt box that understands natural language commands for call scheduling",
+        "CSV export of call logs for auditing and post-run analysis",
+        "Twilio test mode-only dialing with safe, sandboxed call execution",
+        "Dynamic voice messages powered by OpenAI GPT-4o-mini"
+      ],
+      technologies: ["FastAPI", "Twilio Voice API", "SQLite", "SQLAlchemy", "AioSQLite", "OpenAI API", "Python 3.11", "Jinja2", "TailwindCSS"],
+      accuracy: "Real-time status tracking",
+      improvement: "AI-driven voice automation and call orchestration",
+      link: "https://autodialer-72pc.onrender.com/",
+      category: "AI/ML",
+      featured: true
+    },
+    
+
+    {
+      title: "AI Blog Generator",
+      description: "Developed an end-to-end FastAPI web application that generates SEO-ready, long-form blogs (600–800 words) from simple prompts. Users can input up to ten topics, select a tone, and receive polished articles displayed in a modern Tailwind-powered dashboard.",
+      features: [
+        "Bulk-generate up to 10 blog posts (600–800 words each) in one batch",
+        "Option to choose writing tone: Neutral, Formal, Conversational, or Technical",
+        "Auto-save every generated blog to SQLite with regenerate and download options",
+        "Modern Jinja2 + Tailwind CSS UI with live previews and modal reading experience",
+        "Graceful error handling for missing API keys or OpenAI request issues",
+        "Full async FastAPI backend for concurrent blog generation and persistence"
+      ],
+      technologies: ["FastAPI", "Jinja2", "TailwindCSS", "SQLite", "SQLAlchemy", "AioSQLite", "OpenAI API", "Python 3.11"],
+      accuracy: "600–800 word SEO-ready content",
+      improvement: "Automated content generation with tone customization",
+      link: "https://ai-blog-generator-p06n.onrender.com/",
+      category: "AI/ML",
+      featured: true
+    },
+    
+
     {
       title: "Crypto Arbitrage Tracker",
       description: "Developed a comprehensive cryptocurrency arbitrage tracking system with React frontend and Python backend, utilizing multiple API keys to monitor price differences across various cryptocurrency exchanges and platforms in real-time.",
@@ -40,7 +81,7 @@ export const Projects = () => {
       technologies: ["CrewAI", "LangGraph", "OpenAI SDK", "FastAPI", "Weaviate", "React.js", "TailwindCSS"],
       accuracy: "Multi-source validation",
       improvement: "Autonomous research workflow",
-      link: "https://github.com/galaxyte/Agentic-AI-Research-Assistant",
+      link: "https://agentic-frontend-n4sc.onrender.com/",
       category: "AI/ML",
       featured: true
     },
@@ -117,6 +158,7 @@ export const Projects = () => {
       link: "https://github.com/galaxyte/Abnormal-File-Vault",
       category: "Full-Stack"
     }
+
   ];
 
   const filters = ["All", "Full-Stack", "AI/ML", "Web App", "Backend", "Frontend"];
