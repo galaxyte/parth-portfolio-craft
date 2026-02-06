@@ -13,7 +13,7 @@ export const Experience = () => {
     {
       company: "Done Mortgage",
       position: "Full Stack Developer",
-      period: "Nov 2025 – Present",
+      period: "Nov 2025 - Present",
       location: "Remote",
       type: "Current",
       description: [
@@ -28,7 +28,7 @@ export const Experience = () => {
       company: "Smarter.Codes",
       logo: smarterCodesLogo,
       position: "Software Developer",
-      period: "July 2025 - Present",
+      period: "July 2025 - Oct 2025",
       location: "Remote",
       type: "Current",
       description: [
@@ -68,11 +68,11 @@ export const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+    <section id="experience" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">Experience</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Experience</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             My professional journey in software development, from internships to current role
           </p>
         </div>
@@ -119,39 +119,39 @@ const ExperienceCard = ({ experience, index }: { experience: any, index: number 
                 <img 
                   src={experience.logo} 
                   alt={`${experience.company} logo`} 
-                  className="w-24 h-24 object-contain rounded-xl border border-white/20 glow-effect"
+                  className="w-24 h-24 object-contain rounded-xl border border-slate-200 shadow-sm"
                 />
               </div>
             )}
             
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-white gradient-text">{experience.company}</h3>
+                <h3 className="text-2xl font-bold text-slate-800 gradient-text">{experience.company}</h3>
                 <Badge 
                   variant={experience.type === "Current" ? "default" : "secondary"}
-                  className={experience.type === "Current" ? "glass-effect text-green-300 border-green-400/30" : "glass-effect text-gray-300 border-gray-400/30"}
+                  className={experience.type === "Current" ? "bg-green-100 text-green-700 border-green-200" : "bg-slate-100 text-slate-600 border-slate-200"}
                 >
                   {experience.type}
                 </Badge>
               </div>
               
-              <h4 className="text-xl font-semibold text-blue-400 mb-4">{experience.position}</h4>
+              <h4 className="text-xl font-semibold text-blue-600 mb-4">{experience.position}</h4>
               
-              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-gray-400">
+              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-slate-500">
                 <div className="flex items-center gap-2">
-                  <Calendar size={18} className="text-blue-400" />
+                  <Calendar size={18} className="text-blue-600" />
                   <span>{experience.period}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={18} className="text-purple-400" />
+                  <MapPin size={18} className="text-green-600" />
                   <span>{experience.location}</span>
                 </div>
               </div>
               
               <ul className="space-y-3">
                 {experience.description.map((desc, descIndex) => (
-                  <li key={descIndex} className="text-gray-300 flex items-start gap-3 leading-relaxed">
-                    <span className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mt-1 flex-shrink-0 glow-effect"></span>
+                  <li key={descIndex} className="text-slate-600 flex items-start gap-3 leading-relaxed">
+                    <span className="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-1 flex-shrink-0"></span>
                     {desc}
                   </li>
                 ))}

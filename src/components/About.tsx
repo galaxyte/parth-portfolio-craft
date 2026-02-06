@@ -56,11 +56,11 @@ export const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+    <section id="about" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">About Me</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">About Me</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             I'm a passionate Software Developer with expertise in full-stack web development. 
             I love creating innovative solutions and working with cutting-edge technologies.
           </p>
@@ -69,7 +69,7 @@ export const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Education */}
           <div>
-            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Education</h3>
+            <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Education</h3>
             <div className="space-y-6">
               {education.map((edu, index) => (
                 <EducationCard 
@@ -83,7 +83,7 @@ export const About = () => {
 
           {/* Technical Skills */}
           <div>
-            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Technical Skills</h3>
+            <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Technical Skills</h3>
             <div className="space-y-4">
               {Object.entries(skills).map(([category, skillList], index) => (
                 <SkillsCard 
@@ -99,7 +99,7 @@ export const About = () => {
 
         {/* Key Fundamentals */}
         <div className="text-center">
-          <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Core Fundamentals</h3>
+          <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Core Fundamentals</h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {fundamentals.map((fundamental, index) => (
               <FundamentalCard 
@@ -113,7 +113,7 @@ export const About = () => {
 
         {/* Skills Progress Section */}
         <div className="mt-16">
-          <h3 className="text-3xl font-bold text-white mb-8 gradient-text text-center">Technical Proficiency</h3>
+          <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text text-center">Technical Proficiency</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {Object.entries(skillLevels).map(([skill, level], index) => (
               <SkillProgressCard 
@@ -152,10 +152,10 @@ const EducationCard = ({ education, index }: { education: any, index: number }) 
     >
       <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6">
-          <h4 className="text-xl font-semibold text-white mb-2">{education.institution}</h4>
-          <p className="text-blue-400 font-medium mb-2">{education.degree}</p>
-          <p className="text-gray-300 mb-3">{education.grade}</p>
-          <div className="flex justify-between items-center text-sm text-gray-400">
+          <h4 className="text-xl font-semibold text-slate-800 mb-2">{education.institution}</h4>
+          <p className="text-blue-600 font-medium mb-2">{education.degree}</p>
+          <p className="text-slate-600 mb-3">{education.grade}</p>
+          <div className="flex justify-between items-center text-sm text-slate-500">
             <span>{education.period}</span>
             <span>{education.location}</span>
           </div>
@@ -187,12 +187,12 @@ const SkillsCard = ({ category, skillList, index }: { category: string, skillLis
     >
       <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6">
-          <h4 className="font-semibold text-white mb-4 text-xl">{category}</h4>
+          <h4 className="font-semibold text-slate-800 mb-4 text-xl">{category}</h4>
           <div className="flex flex-wrap gap-3">
             {skillList.map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-2 glass-effect text-blue-300 border-blue-400/30 rounded-full text-sm font-medium hover:bg-blue-500/20 transition-all duration-300"
+                className="px-4 py-2 glass-effect text-blue-700 border-blue-200 rounded-full text-sm font-medium hover:bg-blue-50 transition-all duration-300"
               >
                 {skill}
               </span>
@@ -237,12 +237,12 @@ const SkillProgressCard = ({ skill, level, index }: { skill: string, level: numb
       <Card className="glass-card glow-effect">
         <CardContent className="p-6">
           <div className="flex justify-between items-center mb-3">
-            <h4 className="text-white font-semibold">{skill}</h4>
-            <span className="text-blue-400 font-bold">{animatedLevel}%</span>
+            <h4 className="text-slate-800 font-semibold">{skill}</h4>
+            <span className="text-blue-600 font-bold">{animatedLevel}%</span>
           </div>
-          <div className="w-full bg-gray-700 rounded-full h-3">
+          <div className="w-full bg-slate-200 rounded-full h-3">
             <motion.div 
-              className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full"
+              className="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${animatedLevel}%` }}
               transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
@@ -279,8 +279,8 @@ const FundamentalCard = ({ fundamental, index }: { fundamental: any, index: numb
       <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6 text-center">
           <div className="flex flex-col items-center gap-3">
-            <IconComponent size={32} className="text-blue-400" />
-            <span className="text-gray-300 font-medium text-sm">{fundamental.name}</span>
+            <IconComponent size={32} className="text-blue-600" />
+            <span className="text-slate-600 font-medium text-sm">{fundamental.name}</span>
           </div>
         </CardContent>
       </Card>

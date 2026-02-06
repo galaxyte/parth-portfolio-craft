@@ -24,7 +24,7 @@ export const Achievements = () => {
       icon: Award,
       description: "Covered key concepts, including object-oriented programming, data structures, and algorithms in Java.",
       skills: ["OOP", "Data Structures", "Algorithms"],
-      color: "from-blue-500 to-indigo-500"
+      color: "from-blue-500 to-green-500"
     },
     {
       title: "J.P. Morgan Software Engineering Virtual Experience",
@@ -43,11 +43,11 @@ export const Achievements = () => {
   ];
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+    <section id="achievements" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">Achievements</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Achievements</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Recognition of my skills and accomplishments in various competitions, certifications, and experiences
           </p>
         </div>
@@ -109,29 +109,29 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
             <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${achievement.color} flex items-center justify-center glow-effect pulse-glow`}>
               <IconComponent size={40} className="text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4 gradient-text">{achievement.title}</h3>
+            <h3 className="text-2xl font-bold text-slate-800 mb-4 gradient-text">{achievement.title}</h3>
             <div className="flex items-center justify-center gap-3 mb-3">
-              <Badge variant="secondary" className="glass-effect text-blue-300 border-blue-400/30">
+              <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
                 {achievement.platform}
               </Badge>
-              <Badge variant="outline" className="glass-effect text-gray-300 border-gray-400/30">
+              <Badge variant="outline" className="bg-slate-50 text-slate-600 border-slate-200">
                 {achievement.type}
               </Badge>
             </div>
             {achievement.date && (
-              <p className="text-sm text-gray-400">{achievement.date}</p>
+              <p className="text-sm text-slate-500">{achievement.date}</p>
             )}
           </div>
 
-          <p className="text-gray-300 mb-6 flex-grow leading-relaxed">{achievement.description}</p>
+          <p className="text-slate-600 mb-6 flex-grow leading-relaxed">{achievement.description}</p>
 
           {achievement.tasks && (
             <div className="mb-6">
-              <h4 className="font-semibold text-white mb-3 text-lg">Key Tasks:</h4>
+              <h4 className="font-semibold text-slate-800 mb-3 text-lg">Key Tasks:</h4>
               <ul className="space-y-2">
                 {achievement.tasks.map((task, taskIndex) => (
-                  <li key={taskIndex} className="text-gray-300 flex items-start gap-3 text-sm">
-                    <span className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mt-1 flex-shrink-0 glow-effect"></span>
+                  <li key={taskIndex} className="text-slate-600 flex items-start gap-3 text-sm">
+                    <span className="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-1 flex-shrink-0"></span>
                     {task}
                   </li>
                 ))}
@@ -141,12 +141,12 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
 
           {achievement.skills && (
             <div className="mb-6">
-              <h4 className="font-semibold text-white mb-3 text-lg">Skills Covered:</h4>
+              <h4 className="font-semibold text-slate-800 mb-3 text-lg">Skills Covered:</h4>
               <div className="flex flex-wrap gap-2">
                 {achievement.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 glass-effect text-blue-300 border-blue-400/30 rounded-full text-xs font-medium hover:bg-blue-500/20 transition-all duration-300"
+                    className="px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-medium hover:bg-blue-100 transition-all duration-300"
                   >
                     {skill}
                   </span>
@@ -157,10 +157,10 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
 
           {achievement.rewards && (
             <div className="mt-auto">
-              <h4 className="font-semibold text-white mb-3 text-lg">Rewards:</h4>
+              <h4 className="font-semibold text-slate-800 mb-3 text-lg">Rewards:</h4>
               <div className="flex flex-wrap gap-2">
                 {achievement.rewards.map((reward) => (
-                  <Badge key={reward} className="glass-effect text-yellow-300 border-yellow-400/30 hover:bg-yellow-500/20 transition-all duration-300">
+                  <Badge key={reward} className="bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-all duration-300">
                     {reward}
                   </Badge>
                 ))}

@@ -14,12 +14,12 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-28 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-28 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 floating-animation"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 floating-animation" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-40 left-1/2 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 floating-animation" style={{animationDelay: '4s'}}></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating-animation"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating-animation" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-40 left-1/2 w-80 h-80 bg-sky-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating-animation" style={{animationDelay: '4s'}}></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -85,8 +85,8 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
     <div className="space-y-8">
       {/* Profile Picture */}
       <HeroElement index={0}>
-        <div className="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-1 shadow-2xl glow-effect pulse-glow">
-          <div className="w-full h-full rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
+        <div className="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-green-400 via-blue-500 to-blue-400 p-1 shadow-xl shadow-blue-200/50 pulse-glow">
+          <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
             <img 
               src="/profile-photo.jpg" 
               alt="Parth Tiwari" 
@@ -101,7 +101,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
                 }
               }}
             />
-            <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-5xl font-bold" style={{display: 'none'}}>
+            <div className="w-full h-full bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 flex items-center justify-center text-white text-5xl font-bold rounded-full" style={{display: 'none'}}>
               PT
             </div>
           </div>
@@ -110,7 +110,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
       
       {/* Name */}
       <HeroElement index={1}>
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
+        <h1 className="text-6xl md:text-8xl font-bold text-slate-800 mb-4">
           <span className="gradient-text text-glow">
             Parth Tiwari
           </span>
@@ -119,7 +119,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
       
       {/* Description with Typing Animation */}
       <HeroElement index={2}>
-        <div className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        <div className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
           <span className="block mb-2">I'm a passionate</span>
           <TypingAnimation 
             texts={[
@@ -138,12 +138,12 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
       {/* Contact Info */}
       <HeroElement index={3}>
         <div className="flex flex-wrap justify-center gap-6">
-          <div className="flex items-center gap-3 text-gray-300 glass-effect px-4 py-2 rounded-full">
-            <Phone size={20} className="text-blue-400" />
+          <div className="flex items-center gap-3 text-slate-600 glass-effect px-4 py-2 rounded-full">
+            <Phone size={20} className="text-blue-600" />
             <span>7267092113</span>
           </div>
-          <div className="flex items-center gap-3 text-gray-300 glass-effect px-4 py-2 rounded-full">
-            <Mail size={20} className="text-purple-400" />
+          <div className="flex items-center gap-3 text-slate-600 glass-effect px-4 py-2 rounded-full">
+            <Mail size={20} className="text-green-600" />
             <span>parthjtgjs851@gmail.com</span>
           </div>
         </div>
@@ -156,21 +156,21 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
             variant="outline" 
             size="lg"
             onClick={scrollToContact}
-            className="glass-effect border-2 border-blue-400 text-blue-300 hover:bg-blue-500/20 hover:text-white hover:border-blue-300 transition-all duration-300 glow-effect"
+            className="border-2 border-blue-500 text-blue-700 bg-blue-50 hover:bg-blue-100 hover:border-blue-600 transition-all duration-300"
           >
             Get In Touch
           </Button>
           <Button 
             size="lg"
             onClick={scrollToProjects}
-            className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white transition-all duration-300 glow-effect"
+            className="bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 hover:from-green-600 hover:via-blue-600 hover:to-blue-700 text-white transition-all duration-300 shadow-lg shadow-blue-200/40"
           >
             View Projects
           </Button>
           <Button 
             size="lg"
             onClick={downloadResume}
-            className="glass-effect border-2 border-green-400 text-green-300 hover:bg-green-500/20 hover:text-white hover:border-green-300 transition-all duration-300 glow-effect"
+            className="border-2 border-green-500 text-green-700 bg-green-50 hover:bg-green-100 hover:border-green-600 transition-all duration-300"
           >
             <Download className="mr-2" size={20} />
             Resume
@@ -185,19 +185,19 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
             href="https://github.com/galaxyte"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 glass-effect hover:bg-white/20 rounded-full transition-all duration-300 glow-effect"
+            className="p-4 glass-effect hover:bg-slate-100 rounded-full transition-all duration-300"
             aria-label="GitHub"
           >
-            <Github size={24} className="text-gray-300 hover:text-white" />
+            <Github size={24} className="text-slate-600 hover:text-slate-900" />
           </a>
           <a
             href="https://www.linkedin.com/in/parth-tiwari-a56335291/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 glass-effect hover:bg-white/20 rounded-full transition-all duration-300 glow-effect"
+            className="p-4 glass-effect hover:bg-slate-100 rounded-full transition-all duration-300"
             aria-label="LinkedIn"
           >
-            <Linkedin size={24} className="text-gray-300 hover:text-white" />
+            <Linkedin size={24} className="text-slate-600 hover:text-slate-900" />
           </a>
         </div>
       </HeroElement>

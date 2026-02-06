@@ -10,11 +10,11 @@ import { motion } from "framer-motion";
 
 export const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+    <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-white mb-4 gradient-text text-glow">Get In Touch</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Get In Touch</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology
           </p>
         </div>
@@ -22,7 +22,7 @@ export const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Contact Information</h3>
+            <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Contact Information</h3>
             
             <ContactInfoCard 
               icon={Mail}
@@ -46,15 +46,15 @@ export const Contact = () => {
               icon={MapPin}
               title="Location"
               value="Noida, Uttar Pradesh"
-              bgColor="bg-purple-100"
-              iconColor="text-purple-600"
+              bgColor="bg-green-100"
+              iconColor="text-green-600"
               index={2}
             />
           </div>
 
           {/* Contact Form */}
           <div>
-            <h3 className="text-3xl font-bold text-white mb-8 gradient-text">Send Message</h3>
+            <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Send Message</h3>
             <ContactForm />
           </div>
         </div>
@@ -97,8 +97,8 @@ const ContactInfoCard = ({ icon: Icon, title, value, bgColor, iconColor, index }
               <Icon className={iconColor} size={28} />
             </div>
             <div>
-              <h4 className="font-semibold text-white text-lg">{title}</h4>
-              <p className="text-gray-300">{value}</p>
+              <h4 className="font-semibold text-slate-800 text-lg">{title}</h4>
+              <p className="text-slate-600">{value}</p>
             </div>
           </div>
         </CardContent>
@@ -201,7 +201,7 @@ const ContactForm = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-3">
+                <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-3">
                   Name *
                 </label>
                 <Input
@@ -211,20 +211,20 @@ const ContactForm = () => {
                   placeholder="Your name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
+                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
                     errors.name ? 'border-red-400' : ''
                   }`}
                   required
                 />
                 {errors.name && (
-                  <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                  <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
                     <AlertCircle size={16} />
                     {errors.name}
                   </div>
                 )}
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-3">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-3">
                   Email *
                 </label>
                 <Input
@@ -234,13 +234,13 @@ const ContactForm = () => {
                   placeholder="your.email@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
+                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
                     errors.email ? 'border-red-400' : ''
                   }`}
                   required
                 />
                 {errors.email && (
-                  <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                  <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
                     <AlertCircle size={16} />
                     {errors.email}
                   </div>
@@ -249,23 +249,23 @@ const ContactForm = () => {
             </div>
             
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-3">
-                Subject *
-              </label>
-              <Input
-                id="subject"
-                name="subject"
-                type="text"
-                placeholder="What's this about?"
-                value={formData.subject}
-                onChange={handleChange}
-                className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
-                  errors.subject ? 'border-red-400' : ''
-                }`}
+<label htmlFor="subject" className="block text-sm font-medium text-slate-700 mb-3">
+                  Subject *
+                </label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  placeholder="What's this about?"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
+                    errors.subject ? 'border-red-400' : ''
+                  }`}
                 required
               />
               {errors.subject && (
-                <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
                   <AlertCircle size={16} />
                   {errors.subject}
                 </div>
@@ -273,23 +273,23 @@ const ContactForm = () => {
             </div>
             
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-3">
-                Message *
-              </label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Tell me more about your project or inquiry..."
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                className={`w-full glass-effect border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 ${
-                  errors.message ? 'border-red-400' : ''
-                }`}
+<label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-3">
+                  Message *
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell me more about your project or inquiry..."
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
+                    errors.message ? 'border-red-400' : ''
+                  }`}
                 required
               />
               {errors.message && (
-                <div className="flex items-center gap-2 mt-2 text-red-400 text-sm">
+                <div className="flex items-center gap-2 mt-2 text-red-600 text-sm">
                   <AlertCircle size={16} />
                   {errors.message}
                 </div>
@@ -299,7 +299,7 @@ const ContactForm = () => {
             <Button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white transition-all duration-300 glow-effect disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 hover:from-green-600 hover:via-blue-600 hover:to-blue-700 text-white transition-all duration-300 shadow-lg shadow-blue-200/40 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
@@ -318,7 +318,7 @@ const ContactForm = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 text-green-400 text-sm"
+                className="flex items-center gap-2 text-green-600 text-sm"
               >
                 <CheckCircle size={16} />
                 Message sent successfully! I'll get back to you soon.
@@ -329,7 +329,7 @@ const ContactForm = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 text-red-400 text-sm"
+                className="flex items-center gap-2 text-red-600 text-sm"
               >
                 <AlertCircle size={16} />
                 Something went wrong. Please try again.
