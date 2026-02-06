@@ -11,6 +11,20 @@ import { motion } from "framer-motion";
 export const Experience = () => {
   const experiences = [
     {
+      company: "Done Mortgage",
+      position: "Full Stack Developer",
+      period: "Nov 2025 – Present",
+      location: "Remote",
+      type: "Current",
+      description: [
+        "Developed and maintained 2+ mortgage-industry platforms including Tampercheck and Mortgage IQ.",
+        "Built document integrity verification workflows achieving 95%+ tamper detection accuracy.",
+        "Contributed to Mortgage IQ, supporting borrower eligibility, risk assessment, and loan approval decisions.",
+        "Designed and consumed RESTful APIs to handle document processing and borrower data pipelines.",
+        "Deployed production applications using Docker, Render, and Google Cloud, reducing deployment issues by 30%."
+      ]
+    },
+    {
       company: "Smarter.Codes",
       logo: smarterCodesLogo,
       position: "Software Developer",
