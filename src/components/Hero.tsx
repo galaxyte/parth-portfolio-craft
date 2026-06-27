@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Phone, Download } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, Download, MapPin } from "lucide-react";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -123,15 +123,15 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
           <span className="block mb-2">I'm a passionate</span>
           <TypingAnimation 
             texts={[
-              "Full-Stack Developer",
-              "AI/ML Engineer", 
-              "React Specialist",
-              "Python Developer",
-              "Problem Solver"
+              "Backend-Focused Software Engineer",
+              "Python & FastAPI Developer",
+              "AI-Powered Application Developer",
+              "RAG Pipeline Engineer",
+              "Scalable Systems Builder"
             ]} 
             speed={80}
           />
-          <span className="block mt-2">building innovative web solutions with modern technologies</span>
+          <span className="block mt-2">building scalable backend systems, API-driven architectures, and AI-powered applications</span>
         </div>
       </HeroElement>
       
@@ -140,11 +140,15 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
         <div className="flex flex-wrap justify-center gap-6">
           <div className="flex items-center gap-3 text-slate-600 glass-effect px-4 py-2 rounded-full">
             <Phone size={20} className="text-blue-600" />
-            <span>7267092113</span>
+            <span>+91 9211975266</span>
           </div>
           <div className="flex items-center gap-3 text-slate-600 glass-effect px-4 py-2 rounded-full">
             <Mail size={20} className="text-green-600" />
             <span>parthjtgjs851@gmail.com</span>
+          </div>
+          <div className="flex items-center gap-3 text-slate-600 glass-effect px-4 py-2 rounded-full">
+            <MapPin size={20} className="text-green-600" />
+            <span>Noida, India</span>
           </div>
         </div>
       </HeroElement>

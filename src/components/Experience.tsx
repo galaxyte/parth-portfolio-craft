@@ -2,7 +2,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar } from "lucide-react";
-import jungleworksLogo from "./assests/jungleworks_logo.jpg";
 import smarterCodesLogo from "./assests/1631327478988.jpg";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -13,56 +12,29 @@ export const Experience = () => {
     {
       company: "Done Mortgage",
       position: "Full Stack Developer",
-      period: "Nov 2025 - Present",
+      period: "Nov 2025 – Present",
       location: "Remote",
       type: "Current",
       description: [
-        "Developed and maintained 2+ mortgage-industry platforms including Tampercheck and Mortgage IQ.",
-        "Built document integrity verification workflows achieving 95%+ tamper detection accuracy.",
-        "Contributed to Mortgage IQ, supporting borrower eligibility, risk assessment, and loan approval decisions.",
-        "Designed and consumed RESTful APIs to handle document processing and borrower data pipelines.",
-        "Deployed production applications using Docker, Render, and Google Cloud, reducing deployment issues by 30%."
+        "Developed scalable backend services using Python and FastAPI for mortgage automation systems handling borrower verification, financial document processing, and high-volume workflow orchestration.",
+        "Built AI-powered document processing pipelines for automated classification, structured data extraction, validation workflows, and reducing manual review effort across mortgage processing systems.",
+        "Engineered ADMS self-learning AI agent architecture with persistent learning memory, correction tracking, semantic search, and Retrieval-Augmented Generation (RAG) pipelines using pgvector for context-aware document intelligence.",
+        "Developed intelligent chat-agent and review systems enabling grounded LLM-based document querying, confidence scoring, anomaly detection, and automated document review workflows as part of internal TemperCheck validation systems.",
+        "Improved production scalability through microservice architecture, asynchronous background task processing, Docker-based deployments, CI/CD pipelines, and backend performance optimization for production-grade infrastructure."
       ]
     },
     {
       company: "Smarter.Codes",
       logo: smarterCodesLogo,
-      position: "Software Developer",
-      period: "July 2025 - Oct 2025",
-      location: "Remote",
-      type: "Current",
-      description: [
-        "Currently working at Synterex Engineering Group, focusing on the development and enhancement of dashboard features for the Algil Marketplace platform.",
-        "Responsible for implementing new functionalities and fixing critical bugs to ensure a smooth and intuitive user experience.",
-        "Actively contribute to the development and debugging of the AutoMapping feature, aimed at streamlining data integration and improving automation workflows.",
-        "Work aligns with Synterex's mission of leveraging agile methodologies and AI-driven solutions like AgileWriter to support efficient and accessible clinical documentation."
-      ]
-      
-    },
-    {
-      company: "Jungle Works",
-      logo: jungleworksLogo,
-      position: "Associate Software Developer Intern",
-      period: "May 2025 - June 2025",
-      location: "Mohali",
-      type: "Previous",
-      description: [
-        "Worked with the Flash Delivery team, focusing on resolving issues and debugging errors on the Flash Delivery website.",
-        "Improved the website's functionality to enhance user experience and provide better tools for merchants.",
-        "Collaborated with team members to optimize and ensure seamless delivery processes."
-      ]
-    },
-    {
-      company: "Zeal Web Technologies",
-      position: "Software Developer Intern",
-      period: "June 2024 – May 2025",
+      position: "Full Stack Developer",
+      period: "Jul 2025 – Oct 2025",
       location: "Remote",
       type: "Previous",
       description: [
-        "Specialized in developing and maintaining websites for clients, seamlessly managing both frontend and backend tasks.",
-        "Crafted dynamic, scalable, high-performance web solutions using MongoDB, Express.js, React, and Node.js (MERN stack).",
-        "Managed web hosting, API integrations, and database management, along with optimizing website performance and ensuring security.",
-        "Actively collaborated with designers and testers to deliver tailored, cutting-edge solutions that meet client needs and exceed expectations."
+        "Developed scalable backend services using Python and FastAPI for AI-driven automation platforms.",
+        "Built REST APIs and intelligent workflows for task automation and real-time data processing.",
+        "Contributed to microservice architecture, backend optimization, and deployment workflows.",
+        "Participated in debugging, code reviews, and performance improvements for production systems."
       ]
     }
   ];
@@ -73,7 +45,7 @@ export const Experience = () => {
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Experience</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            My professional journey in software development, from internships to current role
+            Building scalable backend systems, AI-powered workflows, and production-grade cloud applications
           </p>
         </div>
 

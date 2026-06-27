@@ -10,40 +10,34 @@ export const About = () => {
   const skillsRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const skills = {
-    "Languages": ["Python", "Java", "JavaScript", "TypeScript"],
-    "Frameworks": ["FastAPI", "Flask", "Express.js", "React.js", "Node.js", "Tailwind CSS", "Next.js"],
-    "Database": ["MongoDB", "PostgreSQL", "MySQL", "Oracle" , "VectorDB" , "Weaviate"],
-    "DevOps": ["GitHub", "Docker", "Postman", "GCP"],
-    "AI": ["GenAI", "OpenAI Agents SDK", "CrewAI", "LangGraph", "AutoGen", "MCP (Model Context Protocol)" ,"LongChain" , "LLM" ]
+    "Languages": ["Java", "Python", "JavaScript", "C/C++"],
+    "Backend Technologies": ["FastAPI", "Flask", "Node.js", "Express.js", "REST APIs", "Microservices"],
+    "Frontend Technologies": ["React.js", "CSS", "Tailwind CSS"],
+    "AI & LLM Technologies": ["OpenAI SDK", "LangChain", "LangGraph", "RAG Pipelines", "Vector Databases", "Weaviate"],
+    "Databases": ["MySQL", "MongoDB", "PostgreSQL", "Oracle"],
+    "Cloud & DevOps": ["Docker", "CI/CD", "Git", "GitHub", "Google Cloud Platform", "Postman"]
   };
 
   const skillLevels = {
     "Python": 95,
-    "JavaScript": 90,
-    "React.js": 88,
-    "Node.js": 85,
-    "TypeScript": 82,
-    "FastAPI": 80,
-    "MongoDB": 85,
-    "PostgreSQL": 75,
-    "Docker": 70,
-    "AWS/GCP": 65
+    "FastAPI": 92,
+    "LangChain & LangGraph": 88,
+    "Java": 85,
+    "REST APIs & Microservices": 90,
+    "React.js": 80,
+    "PostgreSQL": 85,
+    "Docker & CI/CD": 82,
+    "RAG Pipelines": 88,
+    "Google Cloud Platform": 75
   };
 
   const education = [
     {
       institution: "Chandigarh University",
-      degree: "Bachelor Of Engineering in Computer Science",
+      degree: "Bachelor of Engineering in Computer Science",
       grade: "CGPA: 7.76",
-      period: "2021-2025",
+      period: "2021 – 2025",
       location: "Mohali"
-    },
-    {
-      institution: "Golden Bells Public School",
-      degree: "Intermediate",
-      grade: "Percentage: 88.4%",
-      period: "2020-2021",
-      location: "Chandigarh"
     }
   ];
 
@@ -61,8 +55,10 @@ export const About = () => {
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">About Me</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            I'm a passionate Software Developer with expertise in full-stack web development. 
-            I love creating innovative solutions and working with cutting-edge technologies.
+            Backend-Focused Software Engineer with strong expertise in Python, scalable backend systems, 
+            API-driven architectures, and AI-powered application development. Experienced in building 
+            distributed systems, intelligent automation workflows, RAG pipelines, and production-grade 
+            cloud deployed applications with focus on performance and scalability.
           </p>
         </div>
 

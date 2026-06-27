@@ -36,7 +36,7 @@ export const Contact = () => {
             <ContactInfoCard 
               icon={Phone}
               title="Phone"
-              value="+91 7267092113 ,+91 9211975266" 
+              value="+91 9211975266"
               bgColor="bg-green-100"
               iconColor="text-green-600"
               index={1}
@@ -45,7 +45,7 @@ export const Contact = () => {
             <ContactInfoCard 
               icon={MapPin}
               title="Location"
-              value="Noida, Uttar Pradesh"
+              value="Noida, India"
               bgColor="bg-green-100"
               iconColor="text-green-600"
               index={2}
