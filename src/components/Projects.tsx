@@ -213,9 +213,9 @@ export const Projects = () => {
 const ProjectCard = ({ project, index }: { project: any, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-    once: false, 
-    margin: "-100px",
-    amount: 0.3
+    once: true, 
+    margin: "0px",
+    amount: 0.15
   });
 
   // Alternate animation direction based on index
@@ -225,10 +225,10 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
     <motion.div
       ref={ref}
       initial={{ 
-        x: isEven ? -100 : 100, 
+        x: isEven ? -16 : 16, 
         opacity: 0, 
-        y: 20,
-        scale: 0.95
+        y: 8,
+        scale: 0.99
       }}
       animate={isInView ? { 
         x: 0, 
@@ -236,15 +236,15 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
         y: 0,
         scale: 1
       } : { 
-        x: isEven ? -100 : 100, 
+        x: isEven ? -16 : 16, 
         opacity: 0, 
-        y: 20,
-        scale: 0.95
+        y: 8,
+        scale: 0.99
       }}
       transition={{ 
-        duration: 0.8, 
-        ease: [0.25, 0.46, 0.45, 0.94],
-        delay: index * 0.15
+        duration: 0.2, 
+        ease: "easeOut",
+        delay: index * 0.03
       }}
     >
       <Card className="glass-card card-hover glow-effect">

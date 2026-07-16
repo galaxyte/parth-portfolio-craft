@@ -222,20 +222,20 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
 const HeroElement = ({ children, index }: { children: React.ReactNode, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-    once: false, 
-    margin: "-100px",
-    amount: 0.3
+    once: true, 
+    margin: "0px",
+    amount: 0.15
   });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ y: 50, opacity: 0, scale: 0.9 }}
-      animate={isInView ? { y: 0, opacity: 1, scale: 1 } : { y: 50, opacity: 0, scale: 0.9 }}
+      initial={{ y: 12, opacity: 0, scale: 0.98 }}
+      animate={isInView ? { y: 0, opacity: 1, scale: 1 } : { y: 12, opacity: 0, scale: 0.98 }}
       transition={{ 
-        duration: 0.8, 
-        ease: [0.25, 0.46, 0.45, 0.94],
-        delay: index * 0.2
+        duration: 0.2, 
+        ease: "easeOut",
+        delay: index * 0.03
       }}
     >
       {children}
