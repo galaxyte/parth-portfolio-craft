@@ -138,12 +138,12 @@ const EducationCard = ({ education, index }: { education: any, index: number }) 
   return (
     <motion.div
       ref={ref}
-      initial={{ x: -16, opacity: 0 }}
-      animate={isInView ? { x: 0, opacity: 1 } : { x: -16, opacity: 0 }}
+      initial={{ x: -28, opacity: 0 }}
+      animate={isInView ? { x: 0, opacity: 1 } : { x: -28, opacity: 0 }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: index * 0.03
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.06
       }}
     >
       <Card className="glass-card card-hover glow-effect">
@@ -172,12 +172,12 @@ const SkillsCard = ({ category, skillList, index }: { category: string, skillLis
   return (
     <motion.div
       ref={ref}
-      initial={{ x: 16, opacity: 0 }}
-      animate={isInView ? { x: 0, opacity: 1 } : { x: 16, opacity: 0 }}
+      initial={{ x: 28, opacity: 0 }}
+      animate={isInView ? { x: 0, opacity: 1 } : { x: 28, opacity: 0 }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: index * 0.03
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.06
       }}
     >
       <Card className="glass-card card-hover glow-effect">
@@ -212,7 +212,7 @@ const SkillProgressCard = ({ skill, level, index }: { skill: string, level: numb
     if (isInView) {
       const timer = setTimeout(() => {
         setAnimatedLevel(level);
-      }, index * 30);
+      }, index * 50);
       return () => clearTimeout(timer);
     }
   }, [isInView, level, index]);
@@ -220,12 +220,12 @@ const SkillProgressCard = ({ skill, level, index }: { skill: string, level: numb
   return (
     <motion.div
       ref={ref}
-      initial={{ x: -12, opacity: 0 }}
-      animate={isInView ? { x: 0, opacity: 1 } : { x: -12, opacity: 0 }}
+      initial={{ x: -20, opacity: 0 }}
+      animate={isInView ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: index * 0.03
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.06
       }}
     >
       <Card className="glass-card glow-effect">
@@ -239,7 +239,7 @@ const SkillProgressCard = ({ skill, level, index }: { skill: string, level: numb
               className="bg-gradient-to-r from-zinc-700 to-blue-600 h-3 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${animatedLevel}%` }}
-              transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.03 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: index * 0.05 }}
             />
           </div>
         </CardContent>
@@ -259,12 +259,12 @@ const FundamentalCard = ({ fundamental, index }: { fundamental: { name: string; 
   return (
     <motion.div
       ref={ref}
-      initial={{ y: 12, opacity: 0, scale: 0.98 }}
-      animate={isInView ? { y: 0, opacity: 1, scale: 1 } : { y: 12, opacity: 0, scale: 0.98 }}
+      initial={{ y: 24, opacity: 0, scale: 0.97 }}
+      animate={isInView ? { y: 0, opacity: 1, scale: 1 } : { y: 24, opacity: 0, scale: 0.97 }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: index * 0.03
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.06
       }}
     >
       <Card className="glass-card card-hover glow-effect">

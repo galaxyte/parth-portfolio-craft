@@ -95,23 +95,23 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
     <motion.div
       ref={ref}
       initial={{ 
-        y: 12, 
+        y: 24, 
         opacity: 0, 
-        scale: 0.98
+        scale: 0.97
       }}
       animate={isInView ? { 
         y: 0, 
         opacity: 1, 
         scale: 1
       } : { 
-        y: 12, 
+        y: 24, 
         opacity: 0, 
-        scale: 0.98
+        scale: 0.97
       }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: index * 0.03
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.06
       }}
     >
       <Card className="glass-card card-hover glow-effect">

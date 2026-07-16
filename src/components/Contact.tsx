@@ -90,12 +90,12 @@ const ContactInfoCard = ({ icon, title, value, bgColor, iconColor, index }: {
   return (
     <motion.div
       ref={ref}
-      initial={{ x: -16, opacity: 0, y: 8 }}
-      animate={isInView ? { x: 0, opacity: 1, y: 0 } : { x: -16, opacity: 0, y: 8 }}
+      initial={{ x: -28, opacity: 0, y: 18 }}
+      animate={isInView ? { x: 0, opacity: 1, y: 0 } : { x: -28, opacity: 0, y: 18 }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: index * 0.03
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.06
       }}
     >
       <Card className="glass-card card-hover glow-effect">
@@ -193,12 +193,12 @@ const ContactForm = () => {
   return (
     <motion.div
       ref={ref}
-      initial={{ x: 16, opacity: 0, y: 8, scale: 0.985 }}
-      animate={isInView ? { x: 0, opacity: 1, y: 0, scale: 1 } : { x: 16, opacity: 0, y: 8, scale: 0.985 }}
+      initial={{ x: 28, opacity: 0, y: 18, scale: 0.97 }}
+      animate={isInView ? { x: 0, opacity: 1, y: 0, scale: 1 } : { x: 28, opacity: 0, y: 18, scale: 0.97 }}
       transition={{ 
-        duration: 0.2, 
-        ease: "easeOut",
-        delay: 0.05
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.08
       }}
     >
       <Card className="glass-card glow-effect">
