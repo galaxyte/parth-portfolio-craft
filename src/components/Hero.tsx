@@ -25,13 +25,6 @@ export const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-28 section-bg relative overflow-hidden">
-      {/* Subtle motion-driven background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-zinc-200 rounded-full mix-blend-multiply filter blur-xl opacity-40 floating-animation"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 floating-animation" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-40 left-1/2 w-80 h-80 bg-zinc-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 floating-animation" style={{animationDelay: '4s'}}></div>
-      </div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <HeroContent scrollToContact={scrollToContact} />
       </div>

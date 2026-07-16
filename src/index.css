@@ -53,7 +53,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-transparent text-foreground font-body antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -83,11 +83,11 @@
   }
   
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border border-zinc-200/80 shadow-md shadow-zinc-200/40;
+    @apply bg-white/75 backdrop-blur-md border border-zinc-200/80 shadow-md shadow-zinc-200/40;
   }
   
   .glass-card {
-    @apply bg-white/90 backdrop-blur-xl border border-zinc-200 shadow-lg shadow-zinc-200/30;
+    @apply bg-white/85 backdrop-blur-xl border border-zinc-200 shadow-lg shadow-zinc-200/30;
   }
   
   .gradient-text {
@@ -95,11 +95,11 @@
   }
   
   .gradient-bg {
-    @apply bg-zinc-50;
+    @apply bg-transparent;
   }
 
   .section-bg {
-    @apply bg-zinc-50/80;
+    @apply bg-transparent;
   }
   
   .floating-animation {
