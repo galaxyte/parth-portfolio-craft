@@ -7,11 +7,12 @@ type Node = {
   vy: number;
   r: number;
   pulse: number;
+  angle: number;
+  turn: number;
 };
 
 /**
- * Lightweight connected-network background (constellation style).
- * Canvas-based for performance — soft blue nodes + links on a light canvas.
+ * Connected-network background with clear, continuous node motion.
  */
 export const NetworkBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,6 +30,7 @@ export const NetworkBackground = () => {
     let raf = 0;
     let width = 0;
     let height = 0;
+    let time = 0;
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -40,46 +42,128 @@ export const NetworkBackground = () => {
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(55, Math.max(28, Math.floor((width * height) / 28000)));
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: 2.2 + Math.random() * 2.8,
-        pulse: Math.random() * Math.PI * 2,
-      }));
+      const count = Math.min(48, Math.max(26, Math.floor((width * height) / 32000)));
+      nodes = Array.from({ length: count }, () => {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.55 + Math.random() * 0.75;
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          r: 2.4 + Math.random() * 3.2,
+          pulse: Math.random() * Math.PI * 2,
+          angle,
+          turn: (Math.random() - 0.5) * 0.02,
+        };
+      });
     };
 
     const drawHex = (x: number, y: number, size: number) => {
       ctx.beginPath();
       for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 3) * i - Math.PI / 6;
-        const px = x + size * Math.cos(angle);
-        const py = y + size * Math.sin(angle);
+        const a = (Math.PI / 3) * i - Math.PI / 6;
+        const px = x + size * Math.cos(a);
+        const py = y + size * Math.sin(a);
         if (i === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);
       }
       ctx.closePath();
     };
 
+    const updateNode = (n: Node) => {
+      // gentle wandering turn so paths feel alive
+      n.angle += n.turn + (Math.random() - 0.5) * 0.01;
+      const targetSpeed = 0.7 + Math.sin(n.pulse) * 0.15;
+      n.vx += Math.cos(n.angle) * 0.04;
+      n.vy += Math.sin(n.angle) * 0.04;
+
+      // mouse attraction / push for interactive motion
+      const mdx = mouse.x - n.x;
+      const mdy = mouse.y - n.y;
+      const md = Math.hypot(mdx, mdy);
+      if (md < 220 && md > 1) {
+        const force = (1 - md / 220) * 0.12;
+        n.vx += (mdx / md) * force;
+        n.vy += (mdy / md) * force;
+      }
+
+      // keep speed in a visible range (never freeze)
+      let speed = Math.hypot(n.vx, n.vy);
+      if (speed < 0.45) {
+        n.vx = Math.cos(n.angle) * targetSpeed;
+        n.vy = Math.sin(n.angle) * targetSpeed;
+        speed = targetSpeed;
+      }
+      if (speed > 1.6) {
+        n.vx *= 1.6 / speed;
+        n.vy *= 1.6 / speed;
+      }
+
+      n.x += n.vx;
+      n.y += n.vy;
+      n.pulse += 0.045;
+
+      // bounce off edges so movement stays on screen
+      const pad = 24;
+      if (n.x < pad) {
+        n.x = pad;
+        n.vx = Math.abs(n.vx);
+        n.angle = Math.atan2(n.vy, n.vx);
+      } else if (n.x > width - pad) {
+        n.x = width - pad;
+        n.vx = -Math.abs(n.vx);
+        n.angle = Math.atan2(n.vy, n.vx);
+      }
+      if (n.y < pad) {
+        n.y = pad;
+        n.vy = Math.abs(n.vy);
+        n.angle = Math.atan2(n.vy, n.vx);
+      } else if (n.y > height - pad) {
+        n.y = height - pad;
+        n.vy = -Math.abs(n.vy);
+        n.angle = Math.atan2(n.vy, n.vx);
+      }
+    };
+
     const draw = () => {
+      time += 1;
       ctx.clearRect(0, 0, width, height);
 
-      // soft atmospheric washes
-      const g1 = ctx.createRadialGradient(width * 0.15, height * 0.2, 0, width * 0.15, height * 0.2, width * 0.55);
-      g1.addColorStop(0, "rgba(37, 99, 235, 0.12)");
+      // soft atmospheric washes (slow drift)
+      const ox = Math.sin(time * 0.004) * 40;
+      const oy = Math.cos(time * 0.003) * 30;
+      const g1 = ctx.createRadialGradient(
+        width * 0.18 + ox,
+        height * 0.22 + oy,
+        0,
+        width * 0.18 + ox,
+        height * 0.22 + oy,
+        width * 0.55
+      );
+      g1.addColorStop(0, "rgba(37, 99, 235, 0.14)");
       g1.addColorStop(1, "rgba(37, 99, 235, 0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
-      const g2 = ctx.createRadialGradient(width * 0.85, height * 0.75, 0, width * 0.85, height * 0.75, width * 0.5);
-      g2.addColorStop(0, "rgba(113, 113, 122, 0.1)");
+      const g2 = ctx.createRadialGradient(
+        width * 0.82 - ox,
+        height * 0.78 - oy,
+        0,
+        width * 0.82 - ox,
+        height * 0.78 - oy,
+        width * 0.5
+      );
+      g2.addColorStop(0, "rgba(113, 113, 122, 0.12)");
       g2.addColorStop(1, "rgba(113, 113, 122, 0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
 
-      const linkDist = Math.min(170, width * 0.17);
+      if (!reduceMotion) {
+        for (const n of nodes) updateNode(n);
+      }
+
+      const linkDist = Math.min(190, width * 0.18);
 
       // connections
       for (let i = 0; i < nodes.length; i++) {
@@ -89,76 +173,47 @@ export const NetworkBackground = () => {
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.hypot(dx, dy);
-          if (dist < linkDist) {
-            const alpha = (1 - dist / linkDist) * 0.45;
-            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
+          if (dist >= linkDist) continue;
 
-            // small mid-link dots (constellation accents)
-            if (dist < linkDist * 0.55 && (i + j) % 5 === 0) {
-              ctx.fillStyle = `rgba(100, 116, 139, ${alpha * 0.95})`;
-              ctx.beginPath();
-              ctx.arc((a.x + b.x) / 2, (a.y + b.y) / 2, 1.3, 0, Math.PI * 2);
-              ctx.fill();
-            }
+          const alpha = (1 - dist / linkDist) * 0.5;
+          ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
+          ctx.lineWidth = 1.15;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+
+          // traveling accent dots along links
+          if ((i + j) % 4 === 0) {
+            const t = (Math.sin(time * 0.03 + i * 0.7 + j) + 1) / 2;
+            const px = a.x + (b.x - a.x) * t;
+            const py = a.y + (b.y - a.y) * t;
+            ctx.fillStyle = `rgba(37, 99, 235, ${alpha * 0.95})`;
+            ctx.beginPath();
+            ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+            ctx.fill();
           }
         }
       }
 
       // nodes
       for (const n of nodes) {
-        if (!reduceMotion) {
-          n.x += n.vx;
-          n.y += n.vy;
-          n.pulse += 0.02;
+        const glow = 0.6 + Math.sin(n.pulse) * 0.35;
 
-          // soft mouse parallax pull
-          const mdx = mouse.x - n.x;
-          const mdy = mouse.y - n.y;
-          const md = Math.hypot(mdx, mdy);
-          if (md < 180) {
-            n.vx += (mdx / md) * 0.008;
-            n.vy += (mdy / md) * 0.008;
-          }
-
-          // damping + bounds
-          n.vx *= 0.995;
-          n.vy *= 0.995;
-          const speed = Math.hypot(n.vx, n.vy);
-          if (speed > 0.55) {
-            n.vx *= 0.55 / speed;
-            n.vy *= 0.55 / speed;
-          }
-
-          if (n.x < -20) n.x = width + 20;
-          if (n.x > width + 20) n.x = -20;
-          if (n.y < -20) n.y = height + 20;
-          if (n.y > height + 20) n.y = -20;
-        }
-
-        const glow = 0.55 + Math.sin(n.pulse) * 0.2;
-
-        // outer soft glow
-        ctx.fillStyle = `rgba(37, 99, 235, ${0.12 * glow})`;
-        drawHex(n.x, n.y, n.r * 2.4);
+        ctx.fillStyle = `rgba(37, 99, 235, ${0.16 * glow})`;
+        drawHex(n.x, n.y, n.r * 2.6);
         ctx.fill();
 
-        // hex body
-        ctx.fillStyle = `rgba(96, 165, 250, ${0.45 * glow})`;
-        drawHex(n.x, n.y, n.r * 1.15);
+        ctx.fillStyle = `rgba(96, 165, 250, ${0.55 * glow})`;
+        drawHex(n.x, n.y, n.r * 1.2);
         ctx.fill();
-        ctx.strokeStyle = `rgba(37, 99, 235, ${0.35 * glow})`;
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgba(37, 99, 235, ${0.45 * glow})`;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        // center dot
-        ctx.fillStyle = `rgba(255, 255, 255, ${0.7 * glow})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.85 * glow})`;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, 1.2, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, 1.35, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -179,9 +234,6 @@ export const NetworkBackground = () => {
 
     resize();
     draw();
-    if (reduceMotion) {
-      // one static frame already drawn
-    }
 
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", onMove, { passive: true });
@@ -202,8 +254,7 @@ export const NetworkBackground = () => {
     >
       <div className="absolute inset-0 bg-[linear-gradient(160deg,#f8fafc_0%,#eef4ff_45%,#f4f4f5_100%)]" />
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      {/* readability veil so content stays crisp */}
-      <div className="absolute inset-0 bg-white/20" />
+      <div className="absolute inset-0 bg-white/15" />
     </div>
   );
 };
