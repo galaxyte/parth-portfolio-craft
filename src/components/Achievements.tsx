@@ -1,16 +1,18 @@
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrophy,
   faAward,
   faCode,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { cardHover } from "@/lib/motion";
+import { useReplayInView } from "@/hooks/use-replay-in-view";
 
 export const Achievements = () => {
   const achievements: {
@@ -59,20 +61,34 @@ export const Achievements = () => {
     }
   ];
 
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0.4 });
+
   return (
-    <section id="achievements" className="py-20 section-bg relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow font-heading">Achievements</h2>
-          <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-body">
+    <section id="achievements" className="relative py-8 md:py-10 section-bg">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 16 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.4 }}
+          className="mb-6 text-center md:mb-8"
+        >
+          <p className="mb-2 font-body text-xs font-medium uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
+            Highlights
+          </p>
+          <h2 className="mb-3 font-heading text-3xl font-bold text-zinc-900 dark:text-zinc-50 gradient-text sm:text-4xl md:text-5xl">
+            Achievements
+          </h2>
+          <p className="mx-auto max-w-3xl font-body text-base text-zinc-600 dark:text-zinc-400 sm:text-lg">
             Recognition of my skills and accomplishments in various competitions, certifications, and experiences
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
           {achievements.map((achievement, index) => (
-            <AchievementCard 
-              key={index} 
+            <AchievementCard
+              key={achievement.title}
               achievement={achievement}
               index={index}
             />
@@ -83,103 +99,133 @@ export const Achievements = () => {
   );
 };
 
-const AchievementCard = ({ achievement, index }: { achievement: any, index: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
-    margin: "0px",
-    amount: 0.15
-  });
+const AchievementCard = ({
+  achievement,
+  index,
+}: {
+  achievement: {
+    title: string;
+    platform: string;
+    type: string;
+    icon: IconDefinition;
+    description: string;
+    rewards?: string[];
+    skills?: string[];
+    tasks?: string[];
+    date?: string;
+    color: string;
+  };
+  index: number;
+}) => {
+  const reveal = useReplayInView(index);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ 
-        y: 24, 
-        opacity: 0, 
-        scale: 0.97
-      }}
-      animate={isInView ? { 
-        y: 0, 
-        opacity: 1, 
-        scale: 1
-      } : { 
-        y: 24, 
-        opacity: 0, 
-        scale: 0.97
-      }}
-      transition={{ 
-        duration: 0.4, 
-        ease: [0.22, 1, 0.36, 1],
-        delay: index * 0.06
-      }}
+    <motion.article
+      ref={reveal.ref}
+      initial={reveal.initial}
+      animate={reveal.animate}
+      transition={reveal.transition}
+      whileHover={cardHover}
+      className="group relative overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-700/80 bg-white/85 dark:bg-zinc-900/85 p-[1px] shadow-md shadow-zinc-200/35 backdrop-blur-xl transition-shadow duration-300 hover:border-blue-200/60 hover:shadow-lg hover:shadow-blue-500/10"
     >
-      <Card className="glass-card card-hover glow-effect">
-        <CardContent className="p-8 h-full flex flex-col">
-          <div className="text-center mb-6">
-            <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${achievement.color} flex items-center justify-center glow-effect pulse-glow`}>
-              <FontAwesomeIcon icon={achievement.icon} className="text-4xl text-white" />
-            </div>
-            <h3 className="text-2xl font-bold text-zinc-900 mb-4 gradient-text font-heading">{achievement.title}</h3>
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <Badge variant="secondary" className="bg-zinc-100 text-zinc-700 border-zinc-200 font-body">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-500/8 via-transparent to-zinc-900/5 opacity-70" />
+      <div className="relative flex flex-col rounded-[15px] bg-white/92 dark:bg-zinc-900/92 p-4 sm:p-5">
+        {/* Top: icon + title + tags */}
+        <div className="mb-3 flex gap-3">
+          <motion.div
+            whileHover={{ scale: 1.06, rotate: -3 }}
+            className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${achievement.color} shadow-md`}
+          >
+            <FontAwesomeIcon icon={achievement.icon} className="text-sm text-white" />
+          </motion.div>
+
+          <div className="min-w-0 flex-1">
+            <h3 className="mb-2 font-heading text-[15px] font-bold leading-snug text-zinc-900 dark:text-zinc-50 sm:text-base">
+              {achievement.title}
+            </h3>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Badge className="rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/70 px-2 py-0 text-[10px] font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50">
                 {achievement.platform}
               </Badge>
-              <Badge variant="outline" className="bg-zinc-50 text-zinc-600 border-zinc-200 font-body">
+              <Badge className="rounded-full border border-blue-100 dark:border-blue-900 bg-blue-50/80 dark:bg-blue-950/50 px-2 py-0 text-[10px] font-medium text-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/50">
                 {achievement.type}
               </Badge>
+              {achievement.date && (
+                <span className="font-body text-[11px] text-zinc-400 dark:text-zinc-500">
+                  {achievement.date}
+                </span>
+              )}
             </div>
-            {achievement.date && (
-              <p className="text-sm text-zinc-500 font-body">{achievement.date}</p>
-            )}
           </div>
+        </div>
 
-          <p className="text-zinc-600 mb-6 flex-grow leading-relaxed font-body">{achievement.description}</p>
+        {/* Body: description */}
+        <p className="mb-3 font-body text-[13px] leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-sm">
+          {achievement.description}
+        </p>
 
-          {achievement.tasks && (
-            <div className="mb-6">
-              <h4 className="font-semibold text-zinc-900 mb-3 text-lg font-heading">Key Tasks:</h4>
-              <ul className="space-y-2">
-                {achievement.tasks.map((task: string, taskIndex: number) => (
-                  <li key={taskIndex} className="text-zinc-600 flex items-start gap-3 text-sm font-body">
-                    <span className="w-3 h-3 bg-blue-600 rounded-full mt-1 flex-shrink-0"></span>
-                    {task}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {achievement.skills && (
-            <div className="mb-6">
-              <h4 className="font-semibold text-zinc-900 mb-3 text-lg font-heading">Skills Covered:</h4>
-              <div className="flex flex-wrap gap-2">
-                {achievement.skills.map((skill: string) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 bg-zinc-100 text-zinc-700 border border-zinc-200 rounded-full text-xs font-medium hover:bg-zinc-200 transition-all duration-300 font-body"
-                  >
-                    {skill}
+        {/* Bottom sub-blocks */}
+        {achievement.tasks && (
+          <div className="mt-auto rounded-xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-800/80 px-3 py-2.5">
+            <h4 className="mb-1.5 font-heading text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              Key Tasks:
+            </h4>
+            <ul className="space-y-1.5">
+              {achievement.tasks.map((task, taskIndex) => (
+                <li
+                  key={taskIndex}
+                  className="flex items-start gap-2 font-body text-[12px] leading-snug text-zinc-600 dark:text-zinc-400"
+                >
+                  <span className="mt-0.5 flex h-3.5 w-3.5 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400">
+                    <FontAwesomeIcon icon={faCheck} className="text-[8px]" />
                   </span>
-                ))}
-              </div>
-            </div>
-          )}
+                  <span className="min-w-0">{task}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-          {achievement.rewards && (
-            <div className="mt-auto">
-              <h4 className="font-semibold text-zinc-900 mb-3 text-lg font-heading">Rewards:</h4>
-              <div className="flex flex-wrap gap-2">
-                {achievement.rewards.map((reward: string) => (
-                  <Badge key={reward} className="bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-all duration-300 font-body">
-                    {reward}
-                  </Badge>
-                ))}
-              </div>
+        {achievement.skills && (
+          <div className="mt-auto rounded-xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-800/80 px-3 py-2.5">
+            <h4 className="mb-1.5 font-heading text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              Skills Covered:
+            </h4>
+            <div className="flex flex-wrap gap-1.5">
+              {achievement.skills.map((skill) => (
+                <motion.span
+                  key={skill}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cursor-default rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-0.5 font-body text-[11px] font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:border-blue-200 dark:hover:border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-950/50 hover:text-blue-700 dark:hover:text-blue-300"
+                >
+                  {skill}
+                </motion.span>
+              ))}
             </div>
-          )}
-        </CardContent>
-      </Card>
-    </motion.div>
+          </div>
+        )}
+
+        {achievement.rewards && (
+          <div className="mt-auto rounded-xl border border-amber-100 dark:border-amber-900 bg-amber-50/50 dark:bg-amber-950/40 px-3 py-2.5">
+            <h4 className="mb-1.5 font-heading text-[11px] font-semibold uppercase tracking-wide text-amber-700/80 dark:text-amber-400/80">
+              Rewards:
+            </h4>
+            <div className="flex flex-wrap gap-1.5">
+              {achievement.rewards.map((reward) => (
+                <motion.span
+                  key={reward}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cursor-default rounded-full border border-amber-200 dark:border-amber-800 bg-white dark:bg-zinc-900 px-2 py-0.5 font-body text-[11px] font-medium text-amber-800 dark:text-amber-300"
+                >
+                  {reward}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.article>
   );
 };

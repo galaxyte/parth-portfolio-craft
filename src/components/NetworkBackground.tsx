@@ -16,6 +16,7 @@ type Node = {
  */
 export const NetworkBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isDarkRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,6 +32,17 @@ export const NetworkBackground = () => {
     let width = 0;
     let height = 0;
     let time = 0;
+
+    const syncTheme = () => {
+      isDarkRef.current = document.documentElement.classList.contains("dark");
+    };
+    syncTheme();
+
+    const themeObserver = new MutationObserver(syncTheme);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -72,13 +84,11 @@ export const NetworkBackground = () => {
     };
 
     const updateNode = (n: Node) => {
-      // gentle wandering turn so paths feel alive
       n.angle += n.turn + (Math.random() - 0.5) * 0.01;
       const targetSpeed = 0.7 + Math.sin(n.pulse) * 0.15;
       n.vx += Math.cos(n.angle) * 0.04;
       n.vy += Math.sin(n.angle) * 0.04;
 
-      // mouse attraction / push for interactive motion
       const mdx = mouse.x - n.x;
       const mdy = mouse.y - n.y;
       const md = Math.hypot(mdx, mdy);
@@ -88,7 +98,6 @@ export const NetworkBackground = () => {
         n.vy += (mdy / md) * force;
       }
 
-      // keep speed in a visible range (never freeze)
       let speed = Math.hypot(n.vx, n.vy);
       if (speed < 0.45) {
         n.vx = Math.cos(n.angle) * targetSpeed;
@@ -104,7 +113,6 @@ export const NetworkBackground = () => {
       n.y += n.vy;
       n.pulse += 0.045;
 
-      // bounce off edges so movement stays on screen
       const pad = 24;
       if (n.x < pad) {
         n.x = pad;
@@ -129,8 +137,8 @@ export const NetworkBackground = () => {
     const draw = () => {
       time += 1;
       ctx.clearRect(0, 0, width, height);
+      const dark = isDarkRef.current;
 
-      // soft atmospheric washes (slow drift)
       const ox = Math.sin(time * 0.004) * 40;
       const oy = Math.cos(time * 0.003) * 30;
       const g1 = ctx.createRadialGradient(
@@ -141,7 +149,7 @@ export const NetworkBackground = () => {
         height * 0.22 + oy,
         width * 0.55
       );
-      g1.addColorStop(0, "rgba(37, 99, 235, 0.14)");
+      g1.addColorStop(0, dark ? "rgba(37, 99, 235, 0.22)" : "rgba(37, 99, 235, 0.14)");
       g1.addColorStop(1, "rgba(37, 99, 235, 0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
@@ -154,7 +162,7 @@ export const NetworkBackground = () => {
         height * 0.78 - oy,
         width * 0.5
       );
-      g2.addColorStop(0, "rgba(113, 113, 122, 0.12)");
+      g2.addColorStop(0, dark ? "rgba(113, 113, 122, 0.18)" : "rgba(113, 113, 122, 0.12)");
       g2.addColorStop(1, "rgba(113, 113, 122, 0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
@@ -165,7 +173,6 @@ export const NetworkBackground = () => {
 
       const linkDist = Math.min(190, width * 0.18);
 
-      // connections
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i];
@@ -175,7 +182,7 @@ export const NetworkBackground = () => {
           const dist = Math.hypot(dx, dy);
           if (dist >= linkDist) continue;
 
-          const alpha = (1 - dist / linkDist) * 0.5;
+          const alpha = (1 - dist / linkDist) * (dark ? 0.55 : 0.5);
           ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
           ctx.lineWidth = 1.15;
           ctx.beginPath();
@@ -183,7 +190,6 @@ export const NetworkBackground = () => {
           ctx.lineTo(b.x, b.y);
           ctx.stroke();
 
-          // traveling accent dots along links
           if ((i + j) % 4 === 0) {
             const t = (Math.sin(time * 0.03 + i * 0.7 + j) + 1) / 2;
             const px = a.x + (b.x - a.x) * t;
@@ -196,22 +202,23 @@ export const NetworkBackground = () => {
         }
       }
 
-      // nodes
       for (const n of nodes) {
         const glow = 0.6 + Math.sin(n.pulse) * 0.35;
 
-        ctx.fillStyle = `rgba(37, 99, 235, ${0.16 * glow})`;
+        ctx.fillStyle = `rgba(37, 99, 235, ${(dark ? 0.22 : 0.16) * glow})`;
         drawHex(n.x, n.y, n.r * 2.6);
         ctx.fill();
 
-        ctx.fillStyle = `rgba(96, 165, 250, ${0.55 * glow})`;
+        ctx.fillStyle = `rgba(96, 165, 250, ${(dark ? 0.65 : 0.55) * glow})`;
         drawHex(n.x, n.y, n.r * 1.2);
         ctx.fill();
-        ctx.strokeStyle = `rgba(37, 99, 235, ${0.45 * glow})`;
+        ctx.strokeStyle = `rgba(37, 99, 235, ${(dark ? 0.55 : 0.45) * glow})`;
         ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${0.85 * glow})`;
+        ctx.fillStyle = dark
+          ? `rgba(226, 232, 240, ${0.9 * glow})`
+          : `rgba(255, 255, 255, ${0.85 * glow})`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, 1.35, 0, Math.PI * 2);
         ctx.fill();
@@ -241,6 +248,7 @@ export const NetworkBackground = () => {
 
     return () => {
       cancelAnimationFrame(raf);
+      themeObserver.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
@@ -252,9 +260,9 @@ export const NetworkBackground = () => {
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(160deg,#f8fafc_0%,#eef4ff_45%,#f4f4f5_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(160deg,#f8fafc_0%,#eef4ff_45%,#f4f4f5_100%)] dark:bg-[linear-gradient(160deg,#09090b_0%,#0c1222_45%,#18181b_100%)]" />
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-      <div className="absolute inset-0 bg-white/15" />
+      <div className="absolute inset-0 bg-white/15 dark:bg-zinc-950/40" />
     </div>
   );
 };

@@ -45,6 +45,45 @@
     --sidebar-border: 240 6% 90%;
     --sidebar-ring: 221 83% 53%;
   }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 6% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 6% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 6% 10%;
+
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 221 83% 53%;
+
+    --sidebar-background: 240 10% 4%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 221 83% 53%;
+  }
 }
 
 @layer base {
@@ -54,6 +93,11 @@
 
   body {
     @apply bg-transparent text-foreground font-body antialiased;
+    color-scheme: light;
+  }
+
+  .dark body {
+    color-scheme: dark;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -83,15 +127,15 @@
   }
   
   .glass-effect {
-    @apply bg-white/75 backdrop-blur-md border border-zinc-200/80 shadow-md shadow-zinc-200/40;
+    @apply bg-white/75 backdrop-blur-md border border-zinc-200/80 shadow-md shadow-zinc-200/40 dark:bg-zinc-900/75 dark:border-zinc-700/80 dark:shadow-black/30;
   }
   
   .glass-card {
-    @apply bg-white/85 backdrop-blur-xl border border-zinc-200 shadow-lg shadow-zinc-200/30;
+    @apply bg-white/85 backdrop-blur-xl border border-zinc-200 shadow-lg shadow-zinc-200/30 dark:bg-zinc-900/85 dark:border-zinc-700 dark:shadow-black/40;
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-zinc-900 via-zinc-700 to-blue-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-zinc-900 via-zinc-700 to-blue-600 bg-clip-text text-transparent dark:from-zinc-50 dark:via-zinc-300 dark:to-blue-400;
   }
   
   .gradient-bg {
@@ -225,6 +269,10 @@
 
 ::-webkit-scrollbar-track {
   background: #fafafa;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {

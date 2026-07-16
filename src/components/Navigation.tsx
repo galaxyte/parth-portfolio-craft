@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -16,9 +17,11 @@ import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setScrolled(window.scrollY > 12);
       const sections = ["home", "about", "experience", "projects", "achievements", "contact"];
       const scrollPosition = window.scrollY + 100;
 
@@ -53,69 +56,90 @@ export const Navigation = () => {
   };
 
   return (
-        <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-zinc-200/80 transition-all duration-300">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-            <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink-0">
-            <h1 className="text-3xl font-bold gradient-text text-glow font-heading">
-              Parth Tiwari
-            </h1>
-          </div>
+    <motion.nav
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className={`fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? "border-zinc-200/80 bg-white/85 shadow-sm backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/85"
+          : "border-transparent bg-white/55 backdrop-blur-md dark:bg-zinc-950/55"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between sm:h-20">
+          <button
+            type="button"
+            onClick={() => scrollToSection("home")}
+            className="cursor-pointer font-heading text-xl font-bold gradient-text sm:text-2xl"
+          >
+            Parth Tiwari
+          </button>
           
-              {/* Desktop Navigation */}
-              <div className="hidden md:block">
-                <div className="ml-10 flex items-center space-x-4">
-                  {navItems.map((item) => (
-                      <button
-                        key={item.id}
-                        onClick={() => scrollToSection(item.id)}
-                        className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer font-body ${
-                          activeSection === item.id
-                            ? "bg-blue-50 text-blue-700 border border-blue-200 shadow-sm"
-                            : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-transparent hover:border-zinc-200"
-                        }`}
-                      >
-                        <FontAwesomeIcon icon={item.icon} />
-                        <span>{item.label}</span>
-                      </button>
-                    ))}
-                </div>
-              </div>
+          <div className="hidden md:block">
+            <div className="flex items-center gap-1">
+              {navItems.map((item) => (
+                <motion.button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollToSection(item.id)}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-300 font-body ${
+                    activeSection === item.id
+                      ? "border border-blue-200 bg-blue-50 text-blue-700 shadow-sm dark:border-blue-800 dark:bg-blue-950/60 dark:text-blue-300"
+                      : "border border-transparent text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                  }`}
+                >
+                  <FontAwesomeIcon icon={item.icon} className="text-xs" />
+                  <span>{item.label}</span>
+                </motion.button>
+              ))}
+            </div>
+          </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
-            <button
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-4 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-zinc-200 transition-all duration-300 cursor-pointer"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-zinc-200 p-3 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
               aria-label="Toggle menu"
             >
-              <FontAwesomeIcon icon={isOpen ? faXmark : faBars} className="text-2xl" />
-            </button>
+              <FontAwesomeIcon icon={isOpen ? faXmark : faBars} className="text-lg" />
+            </motion.button>
           </div>
         </div>
       </div>
 
-          {/* Mobile Navigation */}
-          {isOpen && (
-            <div className="md:hidden">
-              <div className="px-6 pt-6 pb-8 space-y-4 bg-white/95 border-t border-zinc-200 shadow-lg">
-                {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`flex items-center gap-3 px-6 py-4 rounded-full text-lg font-medium w-full text-left transition-all duration-300 cursor-pointer font-body ${
-                        activeSection === item.id
-                          ? "bg-blue-50 text-blue-700 border border-blue-200"
-                          : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
-                      }`}
-                    >
-                      <FontAwesomeIcon icon={item.icon} />
-                      <span>{item.label}</span>
-                    </button>
-                  ))}
-              </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden border-t border-zinc-200 bg-white/95 dark:border-zinc-800 dark:bg-zinc-950/95 md:hidden"
+          >
+            <div className="space-y-2 px-4 py-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-3 text-left text-base font-medium transition-all duration-300 font-body ${
+                    activeSection === item.id
+                      ? "border border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800 dark:bg-blue-950/60 dark:text-blue-300"
+                      : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                  }`}
+                >
+                  <FontAwesomeIcon icon={item.icon} />
+                  <span>{item.label}</span>
+                </button>
+              ))}
             </div>
-          )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
