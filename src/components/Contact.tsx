@@ -10,11 +10,11 @@ import { motion } from "framer-motion";
 
 export const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
+    <section id="contact" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Get In Touch</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">Get In Touch</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
             I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology
           </p>
         </div>
@@ -22,13 +22,13 @@ export const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Contact Information</h3>
+            <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text">Contact Information</h3>
             
             <ContactInfoCard 
               icon={Mail}
               title="Email"
               value="parthjtgjs851@gmail.com"
-              bgColor="bg-blue-100"
+              bgColor="bg-blue-50"
               iconColor="text-blue-600"
               index={0}
             />
@@ -37,8 +37,8 @@ export const Contact = () => {
               icon={Phone}
               title="Phone"
               value="+91 9211975266"
-              bgColor="bg-green-100"
-              iconColor="text-green-600"
+              bgColor="bg-zinc-100"
+              iconColor="text-zinc-700"
               index={1}
             />
 
@@ -46,15 +46,15 @@ export const Contact = () => {
               icon={MapPin}
               title="Location"
               value="Noida, India"
-              bgColor="bg-green-100"
-              iconColor="text-green-600"
+              bgColor="bg-zinc-100"
+              iconColor="text-zinc-700"
               index={2}
             />
           </div>
 
           {/* Contact Form */}
           <div>
-            <h3 className="text-3xl font-bold text-slate-800 mb-8 gradient-text">Send Message</h3>
+            <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text">Send Message</h3>
             <ContactForm />
           </div>
         </div>
@@ -97,8 +97,8 @@ const ContactInfoCard = ({ icon: Icon, title, value, bgColor, iconColor, index }
               <Icon className={iconColor} size={28} />
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 text-lg">{title}</h4>
-              <p className="text-slate-600">{value}</p>
+              <h4 className="font-semibold text-zinc-900 text-lg">{title}</h4>
+              <p className="text-zinc-600">{value}</p>
             </div>
           </div>
         </CardContent>
@@ -201,7 +201,7 @@ const ContactForm = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-3">
+                <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-3">
                   Name *
                 </label>
                 <Input
@@ -211,7 +211,7 @@ const ContactForm = () => {
                   placeholder="Your name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
+                  className={`w-full bg-white border border-zinc-300 text-zinc-900 placeholder-zinc-400 focus:border-blue-600 focus:ring-blue-600 ${
                     errors.name ? 'border-red-400' : ''
                   }`}
                   required
@@ -224,7 +224,7 @@ const ContactForm = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-3">
+                <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-3">
                   Email *
                 </label>
                 <Input
@@ -234,7 +234,7 @@ const ContactForm = () => {
                   placeholder="your.email@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
+                  className={`w-full bg-white border border-zinc-300 text-zinc-900 placeholder-zinc-400 focus:border-blue-600 focus:ring-blue-600 ${
                     errors.email ? 'border-red-400' : ''
                   }`}
                   required
@@ -249,7 +249,7 @@ const ContactForm = () => {
             </div>
             
             <div>
-<label htmlFor="subject" className="block text-sm font-medium text-slate-700 mb-3">
+<label htmlFor="subject" className="block text-sm font-medium text-zinc-700 mb-3">
                   Subject *
                 </label>
                 <Input
@@ -259,7 +259,7 @@ const ContactForm = () => {
                   placeholder="What's this about?"
                   value={formData.subject}
                   onChange={handleChange}
-                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
+                  className={`w-full bg-white border border-zinc-300 text-zinc-900 placeholder-zinc-400 focus:border-blue-600 focus:ring-blue-600 ${
                     errors.subject ? 'border-red-400' : ''
                   }`}
                 required
@@ -273,7 +273,7 @@ const ContactForm = () => {
             </div>
             
             <div>
-<label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-3">
+<label htmlFor="message" className="block text-sm font-medium text-zinc-700 mb-3">
                   Message *
                 </label>
                 <Textarea
@@ -283,7 +283,7 @@ const ContactForm = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full bg-white border border-slate-300 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500 ${
+                  className={`w-full bg-white border border-zinc-300 text-zinc-900 placeholder-zinc-400 focus:border-blue-600 focus:ring-blue-600 ${
                     errors.message ? 'border-red-400' : ''
                   }`}
                 required
@@ -299,7 +299,7 @@ const ContactForm = () => {
             <Button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 hover:from-green-600 hover:via-blue-600 hover:to-blue-700 text-white transition-all duration-300 shadow-lg shadow-blue-200/40 disabled:opacity-50"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 shadow-md shadow-blue-200/40 disabled:opacity-50 cursor-pointer"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">
@@ -318,7 +318,7 @@ const ContactForm = () => {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 text-green-600 text-sm"
+                className="flex items-center gap-2 text-blue-600 text-sm"
               >
                 <CheckCircle size={16} />
                 Message sent successfully! I'll get back to you soon.

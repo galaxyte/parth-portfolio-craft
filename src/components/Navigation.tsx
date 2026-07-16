@@ -42,7 +42,7 @@ export const Navigation = () => {
   };
 
   return (
-        <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-slate-200/80 transition-all duration-300">
+        <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-zinc-200/80 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
             <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
@@ -60,10 +60,10 @@ export const Navigation = () => {
                       <button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                        className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
                           activeSection === item.id
-                            ? "bg-blue-100 text-blue-700 border border-blue-200 shadow-sm"
-                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent hover:border-slate-200"
+                            ? "bg-blue-50 text-blue-700 border border-blue-200 shadow-sm"
+                            : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-transparent hover:border-zinc-200"
                         }`}
                       >
                         <IconComponent size={18} />
@@ -78,7 +78,7 @@ export const Navigation = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-4 rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 transition-all duration-300"
+              className="inline-flex items-center justify-center p-4 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-zinc-200 transition-all duration-300 cursor-pointer"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -89,17 +89,17 @@ export const Navigation = () => {
           {/* Mobile Navigation */}
           {isOpen && (
             <div className="md:hidden">
-              <div className="px-6 pt-6 pb-8 space-y-4 bg-white/95 border-t border-slate-200 shadow-lg">
+              <div className="px-6 pt-6 pb-8 space-y-4 bg-white/95 border-t border-zinc-200 shadow-lg">
                 {navItems.map((item) => {
                   const IconComponent = item.icon;
                   return (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`flex items-center gap-3 px-6 py-4 rounded-full text-lg font-medium w-full text-left transition-all duration-300 ${
+                      className={`flex items-center gap-3 px-6 py-4 rounded-full text-lg font-medium w-full text-left transition-all duration-300 cursor-pointer ${
                         activeSection === item.id
-                          ? "bg-blue-100 text-blue-700 border border-blue-200"
-                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                          ? "bg-blue-50 text-blue-700 border border-blue-200"
+                          : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
                       }`}
                     >
                       <IconComponent size={20} />

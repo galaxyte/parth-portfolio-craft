@@ -1,50 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* UI UX Pro Max design system — Parth Portfolio (monochrome + blue accent) */
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222.2 47.4% 11.2%;
+    --background: 0 0% 98%;
+    --foreground: 240 10% 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card-foreground: 240 10% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 240 10% 4%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 240 6% 10%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 5% 26%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 60%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 221 83% 53%;
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222.2 47.4% 11.2%;
-    --sidebar-primary: 217 91% 60%;
+    --sidebar-foreground: 240 10% 4%;
+    --sidebar-primary: 221 83% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 96%;
-    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-    --sidebar-border: 214 32% 91%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 10% 4%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 221 83% 53%;
   }
 }
 
@@ -54,11 +55,27 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -68,19 +85,23 @@
   }
   
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-lg shadow-slate-200/50;
+    @apply bg-white/80 backdrop-blur-md border border-zinc-200/80 shadow-md shadow-zinc-200/40;
   }
   
   .glass-card {
-    @apply bg-white/90 backdrop-blur-xl border border-slate-200 shadow-xl shadow-slate-200/40;
+    @apply bg-white/90 backdrop-blur-xl border border-zinc-200 shadow-lg shadow-zinc-200/30;
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-green-600 via-blue-500 to-blue-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-zinc-900 via-zinc-700 to-blue-600 bg-clip-text text-transparent;
   }
   
   .gradient-bg {
-    @apply bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40;
+    @apply bg-zinc-50;
+  }
+
+  .section-bg {
+    @apply bg-zinc-50/80;
   }
   
   .floating-animation {
@@ -88,7 +109,7 @@
   }
   
   .glow-effect {
-    @apply shadow-lg shadow-slate-200/50 hover:shadow-blue-200/40 transition-all duration-200;
+    @apply shadow-md shadow-zinc-200/50 hover:shadow-blue-200/30 transition-all duration-300;
   }
   
   .neon-border {
@@ -100,7 +121,7 @@
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-slate-200/60;
+    @apply transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-zinc-200/50 cursor-pointer;
   }
   
   .pulse-glow {
@@ -127,10 +148,10 @@
 
 @keyframes pulse-glow {
   0% {
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.12);
   }
   100% {
-    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.25);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.22);
   }
 }
 
@@ -205,14 +226,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(248 250 252);
+  background: #fafafa;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #86efac, #93c5fd);
+  background: linear-gradient(45deg, #a1a1aa, #2563eb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #4ade80, #60a5fa);
+  background: linear-gradient(45deg, #71717a, #1d4ed8);
 }

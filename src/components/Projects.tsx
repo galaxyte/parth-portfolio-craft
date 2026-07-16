@@ -168,11 +168,11 @@ export const Projects = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
+    <section id="projects" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Projects</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">Projects</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
             A showcase of my technical projects, demonstrating problem-solving skills and full-stack development expertise
           </p>
         </div>
@@ -184,10 +184,10 @@ export const Projects = () => {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               variant={activeFilter === filter ? "default" : "outline"}
-              className={`transition-all duration-300 ${
+              className={`transition-all duration-300 cursor-pointer ${
                 activeFilter === filter
-                  ? "bg-blue-100 text-blue-700 border border-blue-200"
-                  : "bg-white/80 text-slate-600 border border-slate-200 hover:bg-slate-50"
+                  ? "bg-blue-600 text-white border border-blue-600 hover:bg-blue-700"
+                  : "bg-white/80 text-zinc-600 border border-zinc-200 hover:bg-zinc-50"
               }`}
             >
               {filter}
@@ -251,15 +251,15 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
         <CardContent className="p-8">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-1">
-              <h3 className="text-3xl font-bold text-slate-800 mb-4 gradient-text">{project.title}</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed text-lg">{project.description}</p>
+              <h3 className="text-3xl font-bold text-zinc-900 mb-4 gradient-text">{project.title}</h3>
+              <p className="text-zinc-600 mb-6 leading-relaxed text-lg">{project.description}</p>
               
               <div className="mb-6">
-                <h4 className="font-semibold text-slate-800 mb-4 text-xl">Key Features:</h4>
+                <h4 className="font-semibold text-zinc-900 mb-4 text-xl">Key Features:</h4>
                 <ul className="space-y-3">
                   {project.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-slate-600 flex items-start gap-3">
-                      <span className="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-1 flex-shrink-0"></span>
+                    <li key={featureIndex} className="text-zinc-600 flex items-start gap-3">
+                      <span className="w-3 h-3 bg-blue-600 rounded-full mt-1 flex-shrink-0"></span>
                       {feature}
                     </li>
                   ))}
@@ -268,7 +268,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
 
               <div className="flex flex-wrap gap-3 mb-6">
                 {project.technologies.map((tech) => (
-                  <Badge key={tech} variant="secondary" className="bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-all duration-300">
+                  <Badge key={tech} variant="secondary" className="bg-zinc-100 text-zinc-700 border border-zinc-200 hover:bg-zinc-200 transition-all duration-300">
                     {tech}
                   </Badge>
                 ))}
@@ -276,7 +276,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
 
               {project.accuracy && (
                 <div className="mb-4">
-                  <span className="inline-block bg-green-50 text-green-700 border border-green-200 px-4 py-2 rounded-full text-sm font-medium">
+                  <span className="inline-block bg-zinc-100 text-zinc-700 border border-zinc-200 px-4 py-2 rounded-full text-sm font-medium">
                     Accuracy: {project.accuracy}
                   </span>
                 </div>
@@ -294,7 +294,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
                 href={project.link} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-blue-600 hover:text-blue-700 font-medium transition-all duration-300 bg-blue-50 border border-blue-200 px-4 py-2 rounded-full hover:bg-blue-100"
+                className="inline-flex items-center gap-3 text-blue-600 hover:text-blue-700 font-medium transition-all duration-300 bg-blue-50 border border-blue-200 px-4 py-2 rounded-full hover:bg-blue-100 cursor-pointer"
               >
                 View Project →
               </a>

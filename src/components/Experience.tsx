@@ -40,11 +40,11 @@ export const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40 relative">
+    <section id="experience" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-slate-800 mb-4 gradient-text text-glow">Experience</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">Experience</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
             Building scalable backend systems, AI-powered workflows, and production-grade cloud applications
           </p>
         </div>
@@ -91,17 +91,17 @@ const ExperienceCard = ({ experience, index }: { experience: any, index: number 
                 <img 
                   src={experience.logo} 
                   alt={`${experience.company} logo`} 
-                  className="w-24 h-24 object-contain rounded-xl border border-slate-200 shadow-sm"
+                  className="w-24 h-24 object-contain rounded-xl border border-zinc-200 shadow-sm"
                 />
               </div>
             )}
             
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-slate-800 gradient-text">{experience.company}</h3>
+                <h3 className="text-2xl font-bold text-zinc-900 gradient-text">{experience.company}</h3>
                 <Badge 
                   variant={experience.type === "Current" ? "default" : "secondary"}
-                  className={experience.type === "Current" ? "bg-green-100 text-green-700 border-green-200" : "bg-slate-100 text-slate-600 border-slate-200"}
+                  className={experience.type === "Current" ? "bg-blue-600 text-white border-blue-600" : "bg-zinc-100 text-zinc-600 border-zinc-200"}
                 >
                   {experience.type}
                 </Badge>
@@ -109,21 +109,21 @@ const ExperienceCard = ({ experience, index }: { experience: any, index: number 
               
               <h4 className="text-xl font-semibold text-blue-600 mb-4">{experience.position}</h4>
               
-              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-slate-500">
+              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-zinc-500">
                 <div className="flex items-center gap-2">
                   <Calendar size={18} className="text-blue-600" />
                   <span>{experience.period}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={18} className="text-green-600" />
+                  <MapPin size={18} className="text-zinc-500" />
                   <span>{experience.location}</span>
                 </div>
               </div>
               
               <ul className="space-y-3">
                 {experience.description.map((desc, descIndex) => (
-                  <li key={descIndex} className="text-slate-600 flex items-start gap-3 leading-relaxed">
-                    <span className="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-1 flex-shrink-0"></span>
+                  <li key={descIndex} className="text-zinc-600 flex items-start gap-3 leading-relaxed">
+                    <span className="w-3 h-3 bg-blue-600 rounded-full mt-1 flex-shrink-0"></span>
                     {desc}
                   </li>
                 ))}

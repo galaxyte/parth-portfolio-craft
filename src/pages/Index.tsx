@@ -9,7 +9,7 @@ import { Navigation } from "@/components/Navigation";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/40 to-green-50/40">
+    <div className="min-h-screen bg-background">
       <Navigation />
       <Hero />
       <About />
