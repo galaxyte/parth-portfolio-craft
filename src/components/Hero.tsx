@@ -1,6 +1,16 @@
 
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Phone, Download, MapPin } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGithub,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faEnvelope,
+  faPhone,
+  faDownload,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -67,7 +77,6 @@ const TypingAnimation = ({ texts, speed = 100 }: { texts: string[], speed?: numb
 // Hero Content Component with Framer Motion
 const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
   const downloadResume = () => {
-    // Create a link to download resume (you can replace with actual resume URL)
     const link = document.createElement('a');
     link.href = '/Parth_Tiwari.pdf';
     link.download = 'Parth_Tiwari_Resume.pdf';
@@ -92,7 +101,6 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
               alt="Parth Tiwari" 
               className="w-full h-full object-cover scale-[2.5] origin-[50%_22%] rounded-full"
               onError={(e) => {
-                // Fallback to initials if image doesn't load
                 const target = e.currentTarget as HTMLImageElement;
                 target.style.display = 'none';
                 const fallback = target.nextElementSibling as HTMLElement;
@@ -110,7 +118,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
       
       {/* Name */}
       <HeroElement index={1}>
-        <h1 className="text-6xl md:text-8xl font-bold text-zinc-900 mb-4">
+        <h1 className="text-6xl md:text-8xl font-bold text-zinc-900 mb-4 font-heading">
           <span className="gradient-text text-glow">
             Parth Tiwari
           </span>
@@ -119,7 +127,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
       
       {/* Description with Typing Animation */}
       <HeroElement index={2}>
-        <div className="text-xl md:text-2xl text-zinc-600 max-w-3xl mx-auto leading-relaxed">
+        <div className="text-xl md:text-2xl text-zinc-600 max-w-3xl mx-auto leading-relaxed font-body">
           <span className="block mb-2">I'm a passionate</span>
           <TypingAnimation 
             texts={[
@@ -139,15 +147,15 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
       <HeroElement index={3}>
         <div className="flex flex-wrap justify-center gap-6">
           <div className="flex items-center gap-3 text-zinc-600 glass-effect px-4 py-2 rounded-full">
-            <Phone size={20} className="text-blue-600" />
+            <FontAwesomeIcon icon={faPhone} className="text-blue-600" />
             <span>+91 9211975266</span>
           </div>
           <div className="flex items-center gap-3 text-zinc-600 glass-effect px-4 py-2 rounded-full">
-            <Mail size={20} className="text-blue-600" />
+            <FontAwesomeIcon icon={faEnvelope} className="text-blue-600" />
             <span>parthjtgjs851@gmail.com</span>
           </div>
           <div className="flex items-center gap-3 text-zinc-600 glass-effect px-4 py-2 rounded-full">
-            <MapPin size={20} className="text-zinc-500" />
+            <FontAwesomeIcon icon={faLocationDot} className="text-zinc-500" />
             <span>Noida, India</span>
           </div>
         </div>
@@ -160,14 +168,14 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
             variant="outline" 
             size="lg"
             onClick={scrollToContact}
-            className="cursor-pointer border-2 border-zinc-900 text-zinc-900 bg-transparent hover:bg-zinc-100 transition-all duration-300"
+            className="cursor-pointer border-2 border-zinc-900 text-zinc-900 bg-transparent hover:bg-zinc-100 transition-all duration-300 font-body"
           >
             Get In Touch
           </Button>
           <Button 
             size="lg"
             onClick={scrollToProjects}
-            className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 shadow-md shadow-blue-200/40"
+            className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 shadow-md shadow-blue-200/40 font-body"
           >
             View Projects
           </Button>
@@ -175,9 +183,9 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
             variant="outline"
             size="lg"
             onClick={downloadResume}
-            className="cursor-pointer border-2 border-zinc-300 text-zinc-700 bg-white hover:bg-zinc-50 hover:border-zinc-400 transition-all duration-300"
+            className="cursor-pointer border-2 border-zinc-300 text-zinc-700 bg-white hover:bg-zinc-50 hover:border-zinc-400 transition-all duration-300 font-body"
           >
-            <Download className="mr-2" size={20} />
+            <FontAwesomeIcon icon={faDownload} className="mr-2" />
             Resume
           </Button>
         </div>
@@ -193,7 +201,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
             className="p-4 glass-effect hover:bg-zinc-100 rounded-full transition-all duration-300 cursor-pointer"
             aria-label="GitHub"
           >
-            <Github size={24} className="text-zinc-600 hover:text-zinc-900" />
+            <FontAwesomeIcon icon={faGithub} className="text-2xl text-zinc-600 hover:text-zinc-900" />
           </a>
           <a
             href="https://www.linkedin.com/in/parth-tiwari-a56335291/"
@@ -202,7 +210,7 @@ const HeroContent = ({ scrollToContact }: { scrollToContact: () => void }) => {
             className="p-4 glass-effect hover:bg-zinc-100 rounded-full transition-all duration-300 cursor-pointer"
             aria-label="LinkedIn"
           >
-            <Linkedin size={24} className="text-zinc-600 hover:text-zinc-900" />
+            <FontAwesomeIcon icon={faLinkedin} className="text-2xl text-zinc-600 hover:text-zinc-900" />
           </a>
         </div>
       </HeroElement>

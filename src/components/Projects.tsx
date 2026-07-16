@@ -171,8 +171,8 @@ export const Projects = () => {
     <section id="projects" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">Projects</h2>
-          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow font-heading">Projects</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-body">
             A showcase of my technical projects, demonstrating problem-solving skills and full-stack development expertise
           </p>
         </div>
@@ -251,14 +251,14 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
         <CardContent className="p-8">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-1">
-              <h3 className="text-3xl font-bold text-zinc-900 mb-4 gradient-text">{project.title}</h3>
-              <p className="text-zinc-600 mb-6 leading-relaxed text-lg">{project.description}</p>
+              <h3 className="text-3xl font-bold text-zinc-900 mb-4 gradient-text font-heading">{project.title}</h3>
+              <p className="text-zinc-600 mb-6 leading-relaxed text-lg font-body">{project.description}</p>
               
               <div className="mb-6">
-                <h4 className="font-semibold text-zinc-900 mb-4 text-xl">Key Features:</h4>
+                <h4 className="font-semibold text-zinc-900 mb-4 text-xl font-heading">Key Features:</h4>
                 <ul className="space-y-3">
                   {project.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-zinc-600 flex items-start gap-3">
+                    <li key={featureIndex} className="text-zinc-600 flex items-start gap-3 font-body">
                       <span className="w-3 h-3 bg-blue-600 rounded-full mt-1 flex-shrink-0"></span>
                       {feature}
                     </li>

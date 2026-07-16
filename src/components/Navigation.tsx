@@ -1,6 +1,17 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, Home, User, Briefcase, FolderOpen, Award, Mail } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faXmark,
+  faHouse,
+  faUser,
+  faBriefcase,
+  faFolderOpen,
+  faTrophy,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,13 +35,13 @@ export const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "about", label: "About", icon: User },
-    { id: "experience", label: "Experience", icon: Briefcase },
-    { id: "projects", label: "Projects", icon: FolderOpen },
-    { id: "achievements", label: "Achievements", icon: Award },
-    { id: "contact", label: "Contact", icon: Mail }
+  const navItems: { id: string; label: string; icon: IconDefinition }[] = [
+    { id: "home", label: "Home", icon: faHouse },
+    { id: "about", label: "About", icon: faUser },
+    { id: "experience", label: "Experience", icon: faBriefcase },
+    { id: "projects", label: "Projects", icon: faFolderOpen },
+    { id: "achievements", label: "Achievements", icon: faTrophy },
+    { id: "contact", label: "Contact", icon: faEnvelope }
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -46,7 +57,7 @@ export const Navigation = () => {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
             <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <h1 className="text-3xl font-bold gradient-text text-glow">
+            <h1 className="text-3xl font-bold gradient-text text-glow font-heading">
               Parth Tiwari
             </h1>
           </div>
@@ -54,23 +65,20 @@ export const Navigation = () => {
               {/* Desktop Navigation */}
               <div className="hidden md:block">
                 <div className="ml-10 flex items-center space-x-4">
-                  {navItems.map((item) => {
-                    const IconComponent = item.icon;
-                    return (
+                  {navItems.map((item) => (
                       <button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
+                        className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer font-body ${
                           activeSection === item.id
                             ? "bg-blue-50 text-blue-700 border border-blue-200 shadow-sm"
                             : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-transparent hover:border-zinc-200"
                         }`}
                       >
-                        <IconComponent size={18} />
+                        <FontAwesomeIcon icon={item.icon} />
                         <span>{item.label}</span>
                       </button>
-                    );
-                  })}
+                    ))}
                 </div>
               </div>
 
@@ -79,8 +87,9 @@ export const Navigation = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-4 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-zinc-200 transition-all duration-300 cursor-pointer"
+              aria-label="Toggle menu"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              <FontAwesomeIcon icon={isOpen ? faXmark : faBars} className="text-2xl" />
             </button>
           </div>
         </div>
@@ -90,23 +99,20 @@ export const Navigation = () => {
           {isOpen && (
             <div className="md:hidden">
               <div className="px-6 pt-6 pb-8 space-y-4 bg-white/95 border-t border-zinc-200 shadow-lg">
-                {navItems.map((item) => {
-                  const IconComponent = item.icon;
-                  return (
+                {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`flex items-center gap-3 px-6 py-4 rounded-full text-lg font-medium w-full text-left transition-all duration-300 cursor-pointer ${
+                      className={`flex items-center gap-3 px-6 py-4 rounded-full text-lg font-medium w-full text-left transition-all duration-300 cursor-pointer font-body ${
                         activeSection === item.id
                           ? "bg-blue-50 text-blue-700 border border-blue-200"
                           : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
                       }`}
                     >
-                      <IconComponent size={20} />
+                      <FontAwesomeIcon icon={item.icon} />
                       <span>{item.label}</span>
                     </button>
-                  );
-                })}
+                  ))}
               </div>
             </div>
           )}

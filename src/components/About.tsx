@@ -1,14 +1,19 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Code, Database, Server, Smartphone, Network, Settings, Brain, Monitor } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDatabase,
+  faGears,
+  faNetworkWired,
+  faBrain,
+  faDesktop,
+} from "@fortawesome/free-solid-svg-icons";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export const About = () => {
-  const educationRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const skillsRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const skills = {
     "Languages": ["Java", "Python", "JavaScript", "C/C++"],
     "Backend Technologies": ["FastAPI", "Flask", "Node.js", "Express.js", "REST APIs", "Microservices"],
@@ -41,20 +46,20 @@ export const About = () => {
     }
   ];
 
-  const fundamentals = [
-    { name: "DBMS", icon: Database },
-    { name: "Software Engineering", icon: Settings },
-    { name: "Networking", icon: Network },
-    { name: "Data Structures & Algorithms", icon: Brain },
-    { name: "Operating Systems", icon: Monitor }
+  const fundamentals: { name: string; icon: IconDefinition }[] = [
+    { name: "DBMS", icon: faDatabase },
+    { name: "Software Engineering", icon: faGears },
+    { name: "Networking", icon: faNetworkWired },
+    { name: "Data Structures & Algorithms", icon: faBrain },
+    { name: "Operating Systems", icon: faDesktop }
   ];
 
   return (
     <section id="about" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">About Me</h2>
-          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow font-heading">About Me</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-body">
             Backend-Focused Software Engineer with strong expertise in Python, scalable backend systems, 
             API-driven architectures, and AI-powered application development. Experienced in building 
             distributed systems, intelligent automation workflows, RAG pipelines, and production-grade 
@@ -63,9 +68,8 @@ export const About = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Education */}
           <div>
-            <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text">Education</h3>
+            <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text font-heading">Education</h3>
             <div className="space-y-6">
               {education.map((edu, index) => (
                 <EducationCard 
@@ -77,9 +81,8 @@ export const About = () => {
             </div>
           </div>
 
-          {/* Technical Skills */}
           <div>
-            <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text">Technical Skills</h3>
+            <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text font-heading">Technical Skills</h3>
             <div className="space-y-4">
               {Object.entries(skills).map(([category, skillList], index) => (
                 <SkillsCard 
@@ -93,9 +96,8 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Key Fundamentals */}
         <div className="text-center">
-          <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text">Core Fundamentals</h3>
+          <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text font-heading">Core Fundamentals</h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {fundamentals.map((fundamental, index) => (
               <FundamentalCard 
@@ -107,9 +109,8 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Skills Progress Section */}
         <div className="mt-16">
-          <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text text-center">Technical Proficiency</h3>
+          <h3 className="text-3xl font-bold text-zinc-900 mb-8 gradient-text text-center font-heading">Technical Proficiency</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {Object.entries(skillLevels).map(([skill, level], index) => (
               <SkillProgressCard 
@@ -126,7 +127,6 @@ export const About = () => {
   );
 };
 
-// Education Card Component with Framer Motion
 const EducationCard = ({ education, index }: { education: any, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -148,10 +148,10 @@ const EducationCard = ({ education, index }: { education: any, index: number }) 
     >
       <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6">
-          <h4 className="text-xl font-semibold text-zinc-900 mb-2">{education.institution}</h4>
-          <p className="text-blue-600 font-medium mb-2">{education.degree}</p>
-          <p className="text-zinc-600 mb-3">{education.grade}</p>
-          <div className="flex justify-between items-center text-sm text-zinc-500">
+          <h4 className="text-xl font-semibold text-zinc-900 mb-2 font-heading">{education.institution}</h4>
+          <p className="text-blue-600 font-medium mb-2 font-body">{education.degree}</p>
+          <p className="text-zinc-600 mb-3 font-body">{education.grade}</p>
+          <div className="flex justify-between items-center text-sm text-zinc-500 font-body">
             <span>{education.period}</span>
             <span>{education.location}</span>
           </div>
@@ -161,7 +161,6 @@ const EducationCard = ({ education, index }: { education: any, index: number }) 
   );
 };
 
-// Skills Card Component with Framer Motion
 const SkillsCard = ({ category, skillList, index }: { category: string, skillList: string[], index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -183,12 +182,12 @@ const SkillsCard = ({ category, skillList, index }: { category: string, skillLis
     >
       <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6">
-          <h4 className="font-semibold text-zinc-900 mb-4 text-xl">{category}</h4>
+          <h4 className="font-semibold text-zinc-900 mb-4 text-xl font-heading">{category}</h4>
           <div className="flex flex-wrap gap-3">
             {skillList.map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-2 glass-effect text-zinc-700 border-zinc-200 rounded-full text-sm font-medium hover:bg-zinc-50 transition-all duration-300"
+                className="px-4 py-2 glass-effect text-zinc-700 border-zinc-200 rounded-full text-sm font-medium hover:bg-zinc-50 transition-all duration-300 font-body"
               >
                 {skill}
               </span>
@@ -200,7 +199,6 @@ const SkillsCard = ({ category, skillList, index }: { category: string, skillLis
   );
 };
 
-// Skill Progress Card Component with Framer Motion
 const SkillProgressCard = ({ skill, level, index }: { skill: string, level: number, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -233,8 +231,8 @@ const SkillProgressCard = ({ skill, level, index }: { skill: string, level: numb
       <Card className="glass-card glow-effect">
         <CardContent className="p-6">
           <div className="flex justify-between items-center mb-3">
-            <h4 className="text-zinc-900 font-semibold">{skill}</h4>
-            <span className="text-blue-600 font-bold">{animatedLevel}%</span>
+            <h4 className="text-zinc-900 font-semibold font-body">{skill}</h4>
+            <span className="text-blue-600 font-bold font-body">{animatedLevel}%</span>
           </div>
           <div className="w-full bg-zinc-200 rounded-full h-3">
             <motion.div 
@@ -250,16 +248,13 @@ const SkillProgressCard = ({ skill, level, index }: { skill: string, level: numb
   );
 };
 
-// Fundamental Card Component with Framer Motion
-const FundamentalCard = ({ fundamental, index }: { fundamental: any, index: number }) => {
+const FundamentalCard = ({ fundamental, index }: { fundamental: { name: string; icon: IconDefinition }, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
     once: false, 
     margin: "-100px",
     amount: 0.3
   });
-
-  const IconComponent = fundamental.icon;
 
   return (
     <motion.div
@@ -275,8 +270,8 @@ const FundamentalCard = ({ fundamental, index }: { fundamental: any, index: numb
       <Card className="glass-card card-hover glow-effect">
         <CardContent className="p-6 text-center">
           <div className="flex flex-col items-center gap-3">
-            <IconComponent size={32} className="text-blue-600" />
-            <span className="text-zinc-600 font-medium text-sm">{fundamental.name}</span>
+            <FontAwesomeIcon icon={fundamental.icon} className="text-3xl text-blue-600" />
+            <span className="text-zinc-600 font-medium text-sm font-body">{fundamental.name}</span>
           </div>
         </CardContent>
       </Card>

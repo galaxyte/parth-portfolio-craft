@@ -1,18 +1,35 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Award, Code } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrophy,
+  faAward,
+  faCode,
+} from "@fortawesome/free-solid-svg-icons";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 
 export const Achievements = () => {
-  const achievements = [
+  const achievements: {
+    title: string;
+    platform: string;
+    type: string;
+    icon: IconDefinition;
+    description: string;
+    rewards?: string[];
+    skills?: string[];
+    tasks?: string[];
+    date?: string;
+    color: string;
+  }[] = [
     {
       title: "Runner-up, Hackathon Sponsored by HP Power",
       platform: "Unstop",
       type: "Competition",
-      icon: Trophy,
+      icon: faTrophy,
       description: "Collaborated with teammates to design an AI-assisted green energy optimization prototype, showcasing strong problem-solving, teamwork, and technical expertise under pressure — which led to a runner-up finish in the competition.",
       rewards: ["T-shirt", "Diary"],
       color: "from-amber-500 to-orange-500"
@@ -21,7 +38,7 @@ export const Achievements = () => {
       title: "Essentials of Java Certification",
       platform: "Microsoft",
       type: "Certification",
-      icon: Award,
+      icon: faAward,
       description: "Covered key concepts, including object-oriented programming, data structures, and algorithms in Java.",
       skills: ["OOP", "Data Structures", "Algorithms"],
       color: "from-zinc-700 to-blue-600"
@@ -30,7 +47,7 @@ export const Achievements = () => {
       title: "J.P. Morgan Software Engineering Virtual Experience",
       platform: "Forage",
       type: "Virtual Experience",
-      icon: Code,
+      icon: faCode,
       date: "March 2024",
       description: "Completed comprehensive software engineering tasks including setting up development environment and working with real-world codebase.",
       tasks: [
@@ -46,8 +63,8 @@ export const Achievements = () => {
     <section id="achievements" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">Achievements</h2>
-          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow font-heading">Achievements</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-body">
             Recognition of my skills and accomplishments in various competitions, certifications, and experiences
           </p>
         </div>
@@ -66,7 +83,6 @@ export const Achievements = () => {
   );
 };
 
-// Achievement Card Component with Framer Motion
 const AchievementCard = ({ achievement, index }: { achievement: any, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -74,8 +90,6 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
     margin: "-100px",
     amount: 0.3
   });
-
-  const IconComponent = achievement.icon;
 
   return (
     <motion.div
@@ -107,30 +121,30 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
         <CardContent className="p-8 h-full flex flex-col">
           <div className="text-center mb-6">
             <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r ${achievement.color} flex items-center justify-center glow-effect pulse-glow`}>
-              <IconComponent size={40} className="text-white" />
+              <FontAwesomeIcon icon={achievement.icon} className="text-4xl text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-zinc-900 mb-4 gradient-text">{achievement.title}</h3>
+            <h3 className="text-2xl font-bold text-zinc-900 mb-4 gradient-text font-heading">{achievement.title}</h3>
             <div className="flex items-center justify-center gap-3 mb-3">
-              <Badge variant="secondary" className="bg-zinc-100 text-zinc-700 border-zinc-200">
+              <Badge variant="secondary" className="bg-zinc-100 text-zinc-700 border-zinc-200 font-body">
                 {achievement.platform}
               </Badge>
-              <Badge variant="outline" className="bg-zinc-50 text-zinc-600 border-zinc-200">
+              <Badge variant="outline" className="bg-zinc-50 text-zinc-600 border-zinc-200 font-body">
                 {achievement.type}
               </Badge>
             </div>
             {achievement.date && (
-              <p className="text-sm text-zinc-500">{achievement.date}</p>
+              <p className="text-sm text-zinc-500 font-body">{achievement.date}</p>
             )}
           </div>
 
-          <p className="text-zinc-600 mb-6 flex-grow leading-relaxed">{achievement.description}</p>
+          <p className="text-zinc-600 mb-6 flex-grow leading-relaxed font-body">{achievement.description}</p>
 
           {achievement.tasks && (
             <div className="mb-6">
-              <h4 className="font-semibold text-zinc-900 mb-3 text-lg">Key Tasks:</h4>
+              <h4 className="font-semibold text-zinc-900 mb-3 text-lg font-heading">Key Tasks:</h4>
               <ul className="space-y-2">
-                {achievement.tasks.map((task, taskIndex) => (
-                  <li key={taskIndex} className="text-zinc-600 flex items-start gap-3 text-sm">
+                {achievement.tasks.map((task: string, taskIndex: number) => (
+                  <li key={taskIndex} className="text-zinc-600 flex items-start gap-3 text-sm font-body">
                     <span className="w-3 h-3 bg-blue-600 rounded-full mt-1 flex-shrink-0"></span>
                     {task}
                   </li>
@@ -141,12 +155,12 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
 
           {achievement.skills && (
             <div className="mb-6">
-              <h4 className="font-semibold text-zinc-900 mb-3 text-lg">Skills Covered:</h4>
+              <h4 className="font-semibold text-zinc-900 mb-3 text-lg font-heading">Skills Covered:</h4>
               <div className="flex flex-wrap gap-2">
-                {achievement.skills.map((skill) => (
+                {achievement.skills.map((skill: string) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-zinc-100 text-zinc-700 border border-zinc-200 rounded-full text-xs font-medium hover:bg-zinc-200 transition-all duration-300"
+                    className="px-3 py-1 bg-zinc-100 text-zinc-700 border border-zinc-200 rounded-full text-xs font-medium hover:bg-zinc-200 transition-all duration-300 font-body"
                   >
                     {skill}
                   </span>
@@ -157,10 +171,10 @@ const AchievementCard = ({ achievement, index }: { achievement: any, index: numb
 
           {achievement.rewards && (
             <div className="mt-auto">
-              <h4 className="font-semibold text-zinc-900 mb-3 text-lg">Rewards:</h4>
+              <h4 className="font-semibold text-zinc-900 mb-3 text-lg font-heading">Rewards:</h4>
               <div className="flex flex-wrap gap-2">
-                {achievement.rewards.map((reward) => (
-                  <Badge key={reward} className="bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-all duration-300">
+                {achievement.rewards.map((reward: string) => (
+                  <Badge key={reward} className="bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-all duration-300 font-body">
                     {reward}
                   </Badge>
                 ))}

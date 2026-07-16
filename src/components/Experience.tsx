@@ -1,7 +1,8 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import smarterCodesLogo from "./assests/1631327478988.jpg";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -43,8 +44,8 @@ export const Experience = () => {
     <section id="experience" className="py-20 section-bg relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow">Experience</h2>
-          <p className="text-xl text-zinc-600 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold text-zinc-900 mb-4 gradient-text text-glow font-heading">Experience</h2>
+          <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-body">
             Building scalable backend systems, AI-powered workflows, and production-grade cloud applications
           </p>
         </div>
@@ -63,7 +64,6 @@ export const Experience = () => {
   );
 };
 
-// Experience Card Component with Framer Motion
 const ExperienceCard = ({ experience, index }: { experience: any, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -98,7 +98,7 @@ const ExperienceCard = ({ experience, index }: { experience: any, index: number 
             
             <div className="flex-1">
               <div className="flex flex-col md:flex-row md:items-center gap-3 mb-4">
-                <h3 className="text-2xl font-bold text-zinc-900 gradient-text">{experience.company}</h3>
+                <h3 className="text-2xl font-bold text-zinc-900 gradient-text font-heading">{experience.company}</h3>
                 <Badge 
                   variant={experience.type === "Current" ? "default" : "secondary"}
                   className={experience.type === "Current" ? "bg-blue-600 text-white border-blue-600" : "bg-zinc-100 text-zinc-600 border-zinc-200"}
@@ -107,22 +107,22 @@ const ExperienceCard = ({ experience, index }: { experience: any, index: number 
                 </Badge>
               </div>
               
-              <h4 className="text-xl font-semibold text-blue-600 mb-4">{experience.position}</h4>
+              <h4 className="text-xl font-semibold text-blue-600 mb-4 font-body">{experience.position}</h4>
               
-              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-zinc-500">
+              <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-zinc-500 font-body">
                 <div className="flex items-center gap-2">
-                  <Calendar size={18} className="text-blue-600" />
+                  <FontAwesomeIcon icon={faCalendarDays} className="text-blue-600" />
                   <span>{experience.period}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={18} className="text-zinc-500" />
+                  <FontAwesomeIcon icon={faLocationDot} className="text-zinc-500" />
                   <span>{experience.location}</span>
                 </div>
               </div>
               
               <ul className="space-y-3">
-                {experience.description.map((desc, descIndex) => (
-                  <li key={descIndex} className="text-zinc-600 flex items-start gap-3 leading-relaxed">
+                {experience.description.map((desc: string, descIndex: number) => (
+                  <li key={descIndex} className="text-zinc-600 flex items-start gap-3 leading-relaxed font-body">
                     <span className="w-3 h-3 bg-blue-600 rounded-full mt-1 flex-shrink-0"></span>
                     {desc}
                   </li>
