@@ -13,7 +13,7 @@ export const Experience = () => {
   const experiences = [
     {
       company: "Done Mortgage",
-      position: "Full Stack Developer",
+      position: "Software Developer",
       period: "Nov 2025 – Present",
       location: "Remote",
       type: "Current",
