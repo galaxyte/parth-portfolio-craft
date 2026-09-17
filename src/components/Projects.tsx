@@ -208,6 +208,33 @@ export const Projects = () => {
       link: "https://github.com/galaxyte/Abnormal-File-Vault",
       category: "Full-Stack",
     },
+
+    {
+  title: "NoteWell",
+  description:
+    "Built an AI-powered study assistant that turns YouTube videos, PDFs, Word documents, audio files and text into structured, searchable study notes, with RAG-powered chat, practice questions and export tools.",
+  features: [
+    "Multi-source input: YouTube links, PDF, DOCX, audio and pasted text",
+    "Timestamped video notes with clickable jump-to-section links",
+    "RAG-powered chat over saved notes using ChromaDB vector search",
+    "Beginner, Medium and Expert learning modes",
+    "Practice question generation from note content",
+    "Background processing with live progress for long lectures",
+    "Export to Markdown, DOCX and PDF",
+  ],
+  technologies: [
+    "Python",
+    "FastAPI",
+    "Google Gemini",
+    "Whisper",
+    "ChromaDB",
+    "SQLite",
+    "JavaScript",
+    "Render",
+  ],
+  link: "https://notewell-7p6e.onrender.com/",
+  category: "AI / Full-Stack",
+},
   ];
 
   const filters = ["All", "Full-Stack", "AI/ML", "Web App", "Backend", "Frontend"];
